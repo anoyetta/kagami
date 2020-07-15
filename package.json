@@ -4,7 +4,8 @@
   "private": "true",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.dev.js --hot --inline --watch --progress --color"
+    "start": "webpack-dev-server --config webpack.config.dev.js --hot --inline --watch --progress --color",
+    "build": "webpack --config webpack.config.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.4",

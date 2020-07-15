@@ -1,27 +1,21 @@
-const isProd = process.env.NODE_ENV === 'production'
-
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { watch } = require('chokidar');
 
-const config = {
-  mode: 'development',
+module.exports = {
+  mode: 'production',
+  target: 'web',
   entry: [
     '@babel/polyfill',
     `${__dirname}/src/App.js`,
   ],
-  devtool: isProd ? false : 'inline-source-map',
+  output: {
+    filename: '[name].[hash].js',
+    path: `${__dirname}/dist`,
+  },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: `${__dirname}/src/view/index.ejs`,
     }),
   ],
-  output: {
-    filename: '[name].[hash].js',
-    path: `${__dirname}/dist`,
-    publicPath: '/',
-  },
   module: {
     rules: [
       {
@@ -36,21 +30,14 @@ const config = {
           'css-loader',
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
 };
-
-if (!isProd) {
-  config.devServer = {
-    before: (app, server) => {
-      watch([
-        `${__dirname}/src/view`,
-      ]).on('all', () => {
-        server.sockWrite(server.sockets, 'content-changed')
-      })
-    },
-    contentBase: `${__dirname}/dist`,
-  }
-}
-
-module.exports = config;
