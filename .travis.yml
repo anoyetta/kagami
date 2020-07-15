@@ -4,5 +4,5 @@ node_js:
 
 deploy: 
   provider: pages:git
-  token: <token>
+  deploy_key: <deploy_key>
   edge: true
