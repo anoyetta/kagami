@@ -1,0 +1,29 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:cypress/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "sourceType": "module"
+  },
+  "rules": {
+    "semi": "off",
+    "brace-style": ["error", "stroustrup", { "allowSingleLine" : true }],
+    "indent": ["error", 2],
+    "no-bitwise": "off",
+    "no-plusplus": "off",
+    "comma-dangle": "off",
+    "linebreak-style": "off"
+  },
+  "globals": {
+    "addOverlayListener": false,
+    "removeOverlayListener": false,
+    "callOverlayHandler": false,
+    "startOverlayEvents": false
+  }
+}

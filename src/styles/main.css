@@ -1,0 +1,304 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap');
+@import '../../resources/jobicons/jobicon.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  /* vertical-align: baseline; */
+}
+html, body, #app {
+  height: 100%;
+  background-color: transparent;
+  overflow: hidden;
+  font-family: "Noto Sans KR", sans-serif;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(64,64,64,0.8);
+  color: #fff;
+  cursor: grab;
+}
+.header-container .content {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.header-container .content > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.header-container .content .duration-box {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  font-family: 'Nanum Gothic Coding', monospace;
+  font-size: 1.2em;
+}
+.header-container .content .info-box {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.header-container #title {
+  font-size: 1em;
+  color: orange;
+}
+.header-container #jobicon .jobicon {
+  width: auto;
+  height: 0.8em;
+  fill: white;
+}
+.header-container #info {
+  font-size: 0.8em;
+}
+
+.iconbutton {
+  font-size: 1.2em;
+  line-height: 2em;
+  width: 2em;
+  height: 2em;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+}
+.iconbutton:hover {
+  background-color: rgba(100,100,100,0.4);
+}
+
+/* menu-trigger button */
+.menu-trigger {
+  display: none;
+}
+.header .menu {
+  visibility: hidden;
+  background-color: rgba(64,64,64,0.8);
+  /* transform: translate(-105%, -105%); */
+  max-width: 5em;
+  right: 0;
+  color: #fff;
+ 
+  position: absolute;
+  z-index: 2;
+}
+.header .menu-trigger:checked ~ .menu {
+  visibility: visible;
+}
+
+
+.black {
+  color: #000;
+}
+.iconbutton ~ .tooltip {
+  visibility: hidden;
+  background-color: rgba(64,64,64,0.8);
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  transform: translate(-105%, -105%);
+  width: 120px;
+  max-width: 5em;
+ 
+  position: absolute;
+  z-index: 3;
+}
+.iconbutton:hover ~ .tooltip {
+  visibility: visible;
+}
+
+#resize-handler {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0; 
+  height: 0; 
+  border-left: 0.8rem solid transparent;
+  border-right: 0.8rem solid transparent;
+  
+  border-top: 0.8rem solid grey;
+  transform: translate(50%, 0%) rotate(-45deg);
+  
+  z-index: 9;
+}
+
+
+.column-flexbox {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+#main {
+  flex: 1;
+  background-color: rgba(63, 63, 63, 0.5);
+  background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, .5) 25%, rgba(255, 255, 255, .5) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .5) 75%, rgba(255, 255, 255, .5) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, .5) 25%, rgba(255, 255, 255, .5) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, .5) 75%, rgba(255, 255, 255, .5) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  animation: bg infinite 20s linear;
+  vertical-align: middle;
+}
+
+
+.skilldisplayer {
+  display: flex;
+  flex-direction: column;
+}
+.skilldisplayer .window {
+  display: flex;
+  flex-direction: row-reverse;
+  height: 2em;
+}
+.skilldisplayer .icon {
+  /* width: 0; */
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+.skilldisplayer .icon:not(.casting) {
+  z-index: 2;
+  animation: icon-move infinite 10s linear;
+}
+.skilldisplayer .icon.casting {
+  z-index: 1;
+  animation: icon-move infinite 18s linear;
+  transition-timing-function: ease;
+}
+
+
+.icon .tooltip {
+  visibility: hidden;
+  background-color: rgba(64,64,64,0.8);
+  color: white;
+  text-align: center;
+  padding: 0.2em 0.5em;
+  border-radius: 6px;
+  transform: translate(0%, 105%);
+  white-space: nowrap;
+  /* width: 120px; */
+  /* max-width: 5em; */
+ 
+  position: absolute;
+  z-index: 9;
+}
+.icon:hover .tooltip {
+  visibility: visible;
+}
+
+.tooltip .additional {
+  font-size: 0.7em;
+}
+
+
+.fetching {
+  background-color: grey;
+  color: white;
+}
+.fetching .fetching-icon {
+  animation: icon-loading infinite 1s ease-in-out;
+  backdrop-filter: blur(0.1em);
+  font-size: 2em;
+}
+.casting {
+  /* filter: grayscale(1); */
+  background-color: black;
+  /* width: 10em; */
+  /* border-right: solid 10em yellow; */
+  padding-right: 80vw;
+  margin-right: -80vw;
+  
+  opacity: 0.5;
+}
+.interrupted {
+  background-color: transparent;
+  padding-right: 0;
+  margin-right: 0;
+}
+.interrupted img {
+  filter: grayscale(0.2) blur(0.1em);
+  opacity: 1;
+}
+.interrupted i.fas {
+  position: absolute;
+  font-size: 3em;
+  color: red;
+}
+.mispositional {
+  vertical-align: center;
+  text-align: center;
+}
+.mispositional img {
+  filter: grayscale(0.2) blur(0.1em);
+}
+.mispositional i.fas {
+  position: absolute;
+  font-size: 3em;
+  color: red;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+#playerskills img {
+  width: 3em;
+}
+#petskills img {
+  width: 2em;
+}
+.casted {
+  padding-right: 0;
+  margin-right: 0;
+  opacity: 0;
+  transition: all 0.4s ease-out;
+}
+
+.aaicon {
+  position: absolute;
+  right: 0;
+  width: 0; 
+  height: 0; 
+  border-left: 0.5em solid transparent;
+  border-right: 0.5em solid transparent;
+  
+  border-bottom: 0.5em solid white;
+  animation: icon-move infinite 10s linear;
+  z-index: 3
+}
+
+
+@keyframes bg {
+  from{ background-position: 0 0; }
+  to{ background-position: -100vw 0; }
+}
+
+@keyframes icon-move {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100vw);
+  }
+}
+
+@keyframes icon-loading {
+  from { transform: rotate(0deg) }
+  to { transform: rotate(360deg) }
+}
