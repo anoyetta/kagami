@@ -7,7 +7,7 @@ script:
 deploy: 
   provider: pages
   token: $GITHUB_TOKEN
-  cleanup: true
+  cleanup: false
   keep_history: true
   on:
     branch: master
