@@ -5,7 +5,9 @@ script:
  - npm build
 
 deploy: 
-  provider: pages:git
-  deploy_key: <deploy_key>
-  edge: true
-  cleanup: false
+  provider: pages
+  github_token: $GITHUB_TOKEN
+  skip_cleanup: true
+  keep_history: true
+  on:
+    branch: master
