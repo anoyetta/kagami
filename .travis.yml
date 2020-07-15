@@ -6,3 +6,4 @@ deploy:
   provider: pages:git
   deploy_key: <deploy_key>
   edge: true
+  cleanup: false
