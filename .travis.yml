@@ -1,11 +1,8 @@
 language: node_js
 node_js:
  - lts/*
-before_install:
-  - npm i -g npm@version-number
 
 deploy: 
   provider: pages:git
   token: <token>
   edge: true
-  cleanup: true
