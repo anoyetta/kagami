@@ -4,7 +4,6 @@ module.exports = {
   mode: 'production',
   target: 'web',
   entry: [
-    '@babel/polyfill',
     `${__dirname}/src/App.js`,
   ],
   output: {

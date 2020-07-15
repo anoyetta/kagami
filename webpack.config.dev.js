@@ -15,7 +15,6 @@ module.exports = {
     contentBase: `${__dirname}/dist`,
   },
   entry: [
-    '@babel/polyfill',
     `${__dirname}/src/App.js`,
   ],
   output: {

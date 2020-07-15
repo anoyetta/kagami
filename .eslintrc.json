@@ -4,8 +4,7 @@
     "es2020": true
   },
   "extends": [
-    "airbnb-base",
-    "plugin:cypress/recommended"
+    "airbnb-base"
   ],
   "parserOptions": {
     "ecmaVersion": 11,
