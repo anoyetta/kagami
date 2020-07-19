@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@700&display=swap');
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(64,64,64,0.8);
+  color: #fff;
+  cursor: grab;
+}
+.header-container .content {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.header-container .content > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.header-container .content .duration-box {
+  width: 4rem;
+  align-items: center;
+  cursor: pointer;
+}
+.header-container .content .duration-box > #duration {
+  font-family: 'Nanum Gothic Coding', monospace;
+  font-size: 1.2em;
+}
+.header-container .content .duration-box:hover > #duration {
+  display: none;
+}
+.header-container .content .duration-box > #reset-encounter {
+  display: none;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  /* background-color: rgba(100,100,100,0.4); */
+}
+.header-container .content .duration-box:hover > #reset-encounter {
+  display: inherit;
+}
+/* #reset-encounter .reset-encounter-button {
+} */
+#reset-encounter .reset-encounter-tooltip {
+  background-color: rgba(64,64,64,0.8);
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  left: 4rem;
+  width: 120px;
+ 
+  position: absolute;
+  z-index: 3;
+}
+
+.header-container .content .info-box {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.header-container #title {
+  font-size: 1em;
+  color: orange;
+}
+.header-container #jobicon .jobicon {
+  width: auto;
+  height: 0.8em;
+  fill: white;
+}
+.header-container #info {
+  font-size: 0.8em;
+}
+
+
+.iconbutton ~ .tooltip {
+  visibility: hidden;
+  background-color: rgba(64,64,64,0.8);
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  left: 4rem;
+  width: 120px;
+ 
+  position: absolute;
+  z-index: 3;
+}
+.iconbutton:hover ~ .tooltip {
+  visibility: visible;
+}
+
+/* menu-trigger button */
+.header .menu {
+  display: flex;
+  visibility: visible;
+  flex-direction: column;
+  background-color: rgba(64,64,64,0.8);
+  color: #fff;
+  margin-top: 0%;
+  transition: margin-top 0.2s ease;
+
+  position: absolute;
+  right: 0;
+  z-index: 9;
+}
+.header .menu .menu-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.header #menu-icon:not(:hover) .menu {
+  display: none;
+  visibility: hidden;
+  margin-top: -100%;
+}

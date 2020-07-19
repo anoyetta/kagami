@@ -1,0 +1,50 @@
+/* switch component */
+.switch {
+  position: relative;
+  width: 70px;
+  height: 40px;
+}
+.switch-track {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  width: 30px;
+  height: 10px;
+  background-color: rgb(100,100,100);
+  opacity: 0.4;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+.switch-thumb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+.switch-thumb-underlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+.switch:hover .switch-thumb-underlay {
+  background-color: rgba(100,100,100,0.4);
+}
+
+input:checked ~ .switch .switch-track {
+  background-color: orange;
+}
+input:checked ~ .switch .switch-thumb-underlay {
+  transform: translateX(30px);
+}
+input:checked ~ .switch .switch-thumb {
+  background-color: orange;
+}

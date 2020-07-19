@@ -1,9 +1,12 @@
 <div class="header">
-  <input type="checkbox" id="menu-trigger" class="menu-trigger" />
   <div class="header-container">
     <div class="content">
       <div class="duration-box">
         <span id="duration">00:00</span>
+        <div id="reset-encounter">
+          <i class="material-icons reset-encounter-button">timer_off</i>
+          <div class="reset-encounter-tooltip">Reset encounter</div>
+        </div>
       </div>
       <div class="info-box">
         <h5 id="title">kagami</h5>
@@ -13,39 +16,50 @@
         </div>
       </div>
     </div>
-    <label for="menu-trigger">
-      <i class="fas fa-ellipsis-v iconbutton"></i>
-      <span class="tooltip">더 보기</span>
-    </label>
+    <div id="menu-icon">
+      <i class="material-icons iconbutton">more_vert</i>
+      <nav class="menu">
+        <label for="auto-attack-switch" class="menu-item">
+          <div>show auto-attack</div>
+          <input type="checkbox" id="auto-attack-switch" checked>
+          <div class="switch">
+            <div class="switch-track"></div>
+            <div class="switch-thumb-underlay">
+              <div class="switch-thumb"></div>
+            </div>
+          </div>
+        </label>
+        <label for="pet-actions-switch" class="menu-item">
+          <div>show pet actions</div>
+          <input type="checkbox" id="pet-actions-switch" checked>
+          <div class="switch">
+            <div class="switch-track"></div>
+            <div class="switch-thumb-underlay">
+              <div class="switch-thumb"></div>
+            </div>
+          </div>
+        </label>
+        <!-- <div>
+          <i class="fas fa-chart-line iconbutton"></i>
+          <div class="tooltip">DPS그래프 표시</div>
+        </div>
+        <div>
+          <i class="fas fa-users iconbutton"></i>
+          <span class="tooltip">파티원 DPS그래프</span>
+        </div>
+        <div>
+          <i class="fas fa-chart-area iconbutton"></i>
+          <span class="tooltip">RDPS그래프</span>
+        </div>
+        <div>
+          <i class="fas fa-stream iconbutton"></i>
+          <span class="tooltip">버프 표시</span>
+        </div>
+        <div>
+          <i class="fas fa-cog iconbutton"></i>
+          <span class="tooltip">설정</span>
+        </div> -->
+      </nav>
+    </div>
   </div>
-  <nav class="menu">
-    <div>
-      <i class="fas fa-redo iconbutton"></i>
-      <span class="tooltip">초기화</span>
-    </div>
-    <div>
-      <i class="fas fa-dog iconbutton"></i>
-      <span class="tooltip">펫 액션 표시</span>
-    </div>
-    <div>
-      <i class="fas fa-chart-line iconbutton"></i>
-      <div class="tooltip">DPS그래프 표시</div>
-    </div>
-    <div>
-      <i class="fas fa-users iconbutton"></i>
-      <span class="tooltip">파티원 DPS그래프</span>
-    </div>
-    <div>
-      <i class="fas fa-chart-area iconbutton"></i>
-      <span class="tooltip">RDPS그래프</span>
-    </div>
-    <div>
-      <i class="fas fa-stream iconbutton"></i>
-      <span class="tooltip">버프 표시</span>
-    </div>
-    <div>
-      <i class="fas fa-cog iconbutton"></i>
-      <span class="tooltip">설정</span>
-    </div>
-  </nav>
 </div>

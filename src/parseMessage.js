@@ -1,4 +1,5 @@
 import jobcode from '../resources/jobicons'
+import { handleAction, handleInterrupt } from './handleAction';
 
 let primaryCharacter = {
   charID: -1,
@@ -6,35 +7,6 @@ let primaryCharacter = {
   petID: -1,
   petName: '',
 }
-const castingQueue = []
-let lastTimestamp = -1;
-let lastActionID = -1;
-
-// job specific values
-const monkPositionals = [
-  53, // 連撃
-  56, // 崩拳
-  54, // 正拳突き
-  74, // 双竜脚
-  61, // 双掌打
-  66, // 破砕拳
-]
-const dragoonPositionals = [
-  88,
-  79,
-  3554,
-  3556,
-]
-const ninjaPositionals = [
-  2255, // 旋風刃
-  3563, // 強甲破点突
-]
-const samuraiPositionals = [
-  7481, // 月光
-  7482, // 花車
-]
-let gauge
-const wyrmWaveCount = 0;
 
 const updatePet = (logCode, logParameter) => {
   const summoned = logCode === '03'
@@ -90,208 +62,6 @@ const handleBuff = (logTimestamp, logParameter) => {
   }
 }
 
-const handleInterrupt = (logTimestamp, logParameter) => {
-  const inturruptedAction = {
-    timestamp: logTimestamp,
-    actionID: parseInt(logParameter[2], 16),
-    actionName: logParameter[3],
-    actorID: parseInt(logParameter[0], 16),
-    actorName: logParameter[1],
-  }
-  if (inturruptedAction.actorID === primaryCharacter.charID) {
-    castingQueue.forEach((castingAction) => {
-      if (castingAction.icon.classList.contains('casting')) {
-        const banIcon = document.createElement('i')
-        banIcon.classList.add('fas', 'fa-ban')
-        castingAction.icon.classList.remove('casting')
-        castingAction.icon.classList.add('interrupted')
-        castingAction.icon.appendChild(banIcon)
-      }
-    })
-  }
-  // castingQueue.filter((castingAction) => {
-  //   if (castingAction.actorID === inturruptedAction.actorID) {
-  //     const banIcon = document.createElement('i')
-  //     banIcon.classList.add('fas', 'fa-ban')
-  //     castingAction.icon.classList.remove('casting')
-  //     castingAction.icon.classList.add('interrupted')
-  //     castingAction.icon.appendChild(banIcon)
-  //     return false
-  //   }
-  //   return true
-  // })
-}
-
-const handleAction = async (logCode, logTimestamp, logParameter) => {
-  console.log(logParameter)
-  const action = {
-    timestamp: logTimestamp,
-    actionID: parseInt(logParameter[2], 16),
-    actionName: logParameter[3],
-    actorID: parseInt(logParameter[0], 16),
-    actorName: logParameter[1],
-    targetID: logParameter[4],
-    targetName: logParameter[5],
-    casting: logCode === '20'
-  }
-
-  // AoE action will make multiple log. no duplicate allowed
-  if ((action.timestamp === lastTimestamp && action.actionID === lastActionID)) return
-
-  // only parse primaryCharacter and pet action
-  if (!(action.actorID === primaryCharacter.charID
-  || action.actorID === primaryCharacter.petID)) return
-
-  // no mount action
-  if (action.actionID === 4) return
-
-  // no invalid actionID
-  if (action.actionID > 21000) {
-    if (action.actionID > 0x4000000) {
-      // mount icons: 59000 ~ 59399 (266 total)
-      const mountID = action.actionID & 0xffffff
-      console.log(await fetch(`https://xivapi.com/mount/${mountID}`)
-        .then((res) => res.json())
-        .then((json) => json.Icon))
-    }
-    else if (action.actionID > 0x2000000) {
-      // item icons: (30999 total)
-      let itemID = action.actionID & 0xffffff
-      if (itemID > 1000000) itemID -= 1000000 // hq item
-      console.log(await fetch(`https://xivapi.com/item/${itemID}`)
-        .then((res) => res.json())
-        .then((json) => json.Icon))
-    }
-    return
-  }
-
-  lastTimestamp = action.timestamp
-  lastActionID = action.actionID
-
-  if (action.actionID === 7 || action.actionID === 8) { // autoattack
-    // console.log('평타요')
-    const aaicon = document.createElement('span')
-    aaicon.classList.add('aaicon')
-    document.getElementById('playeraa').appendChild(aaicon)
-    setTimeout(() => {
-      document.getElementById('playeraa').removeChild(aaicon)
-    }, 10000)
-    return
-  }
-  const actionIcon = document.createElement('div')
-  actionIcon.classList.add('icon', 'fetching')
-  action.icon = actionIcon
-  if (action.actorID === primaryCharacter.charID) {
-    document.getElementById('playerskills').appendChild(actionIcon)
-    setTimeout(() => {
-      document.getElementById('playerskills').removeChild(actionIcon)
-    }, 10000)
-  }
-  else if (action.actorID === primaryCharacter.petID) {
-    document.getElementById('petskills').appendChild(actionIcon)
-    setTimeout(() => {
-      document.getElementById('petskills').removeChild(actionIcon)
-    }, 10000)
-  }
-
-  const fetchingIcon = document.createElement('i')
-  fetchingIcon.classList.add('fas', 'fa-spinner', 'fetching-icon')
-  actionIcon.appendChild(fetchingIcon)
-  // actionIcon.classList.add('icon-loading')
-  const actionApi = await getActionApi(action.actionID)
-
-  const actionTooltip = document.createElement('span')
-  actionTooltip.innerHTML = action.actionName
-  actionTooltip.classList.add('tooltip')
-  actionIcon.appendChild(actionTooltip)
-
-  // check positional
-  const positional = checkPositional(action, logParameter)
-  if (!positional) {
-    const exclamationIcon = document.createElement('i')
-    exclamationIcon.classList.add('fas', 'fa-exclamation')
-    actionIcon.classList.add('mispositional')
-    actionIcon.appendChild(exclamationIcon)
-
-    const tooltipAdditionalText = document.createElement('div')
-    tooltipAdditionalText.classList.add('additional')
-    tooltipAdditionalText.innerHTML = '(方向指定ミス)'
-    actionTooltip.appendChild(tooltipAdditionalText)
-  }
-
-  // check casting
-  if (action.casting) {
-    actionIcon.classList.add('casting')
-    castingQueue.push(action)
-  }
-  else {
-    castingQueue.forEach((castingAction) => {
-      if (castingAction.actorID === action.actorID
-        && castingAction.icon.classList.contains('casting')) {
-        castingAction.icon.classList.add('casted')
-      }
-    })
-  }
-
-  // wyrmwavecount
-
-  const image = new Image()
-  image.src = `https://xivapi.com${actionApi.Icon}`
-  actionIcon.classList.remove('fetching')
-  actionIcon.appendChild(image)
-  actionIcon.removeChild(fetchingIcon)
-}
-
-const checkPositional = (action, logParameter) => {
-  if (monkPositionals.includes(action.actionID)) {
-    // monk rear/flank check
-    return logParameter.slice(8, 13).includes('1B')
-  }
-  if (dragoonPositionals.includes(action.actionID)) {
-    // dragoon rear/flank check
-    const succeedCode = action.actionID === 88 ? '11B' : '1B' // 桜花は11Bにコードが変わる
-    return logParameter.slice(12, 15).includes(succeedCode)
-  }
-  if (ninjaPositionals.includes(action.actionID)) {
-    // ninja rear/flank check
-    const succeedCode = '11B'
-    return logParameter.slice(12, 15).includes(succeedCode)
-  }
-  if (action.actionID === 2258) {
-    // だまし討ち
-    const succeedCode = '1E71' // 1E710003 1E710203 1E710303
-    // failedCode: 00710003 00710203
-    return logParameter[6].contains(succeedCode)
-  }
-  // TODO: samurai positional check
-  // if (samuraiActions.includes(action.actionID)) {
-  //   // samurai rear/flank check by kenki gauge up
-  //   // const kenki = gauge
-  //   // let updatedKenki = kenki
-  //   // const getUpdatedKenki = () => {
-  //   //   if(kenki === updatedKenki) {
-  //   //     setTimeout(getUpdatedKenki, 50)
-  //   //     console.log(kenki, updatedKenki)
-  //   //     return
-  //   //   }
-  //   //   updatedKenki = gauge
-
-  //   //   console.log(kenki, updatedKenki)
-  //   //   console.log(action)
-  //   // }
-  //   // getUpdatedKenki()
-  // }
-
-  return true
-}
-const getActionApi = async (actionID) => fetch(`https://xivapi.com/Action/${actionID}`)
-  .then((res) => res.json())
-  // .then((json) => {
-  //   // const src = `https://xivapi.com${json.Icon}`
-  //   console.log(json)
-  //   return json
-  // })
-
 const parseLogLine = (logSplit) => {
   const [
     logCode,
@@ -340,14 +110,14 @@ const parseLogLine = (logSplit) => {
   }
   case '20': // start casting
   case '21': // action
-  case '22': {
-    // hits on AoE action
-    handleAction(logCode, logTimestamp, logParameter)
+  case '22': // multi-target action
+  {
+    handleAction(primaryCharacter, logCode, logTimestamp, logParameter)
     break
   }
   case '23': {
     // cancel casting
-    handleInterrupt(logTimestamp, logParameter)
+    handleInterrupt(primaryCharacter, logParameter)
     break
   }
   case '24': {
@@ -379,8 +149,10 @@ const parseLogLine = (logSplit) => {
     // handleJobGauge(logParameter)
     break
   }
-  case '33': {
+  case '33': { // no idea about this
     // ["80037569", "80000004", "A8B", "00", "00", "00", "deb0f7a8c61281c53c3e6885eaf69ad8"]
+    // ["8003756C", "40000007", "00", "01", "00", "00", "6fa67b88b7299d622ac8341fbe1d9c13"]
+    // ["8003756C", "80000004", "13EB", "00", "00", "00", "7976c4ec041735f73b665ae81134f0aa"]
     console.log(logCode, logTimestamp, logParameter)
     break
   }
