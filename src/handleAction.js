@@ -88,7 +88,7 @@ const checkPositional = (actionID, logParameter) => {
     positionalActionCount++
 
     const succeedCode = actionID === 88 ? '11B' : '1B' // 桜花は11Bにコードが変わる
-    return logParameter.slice(10, 15).includes(succeedCode)
+    return logParameter.slice(8, 15).includes(succeedCode)
   }
   if (ninjaPositionals.includes(actionID)) {
     // ninja rear/flank check
