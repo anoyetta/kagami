@@ -147,7 +147,7 @@ const showActionIcon = (action) => {
       visibility: ['visible', 'visible']
     },
     {
-      duration: speed * 1000 + action.castTime * 100,
+      duration: speed * (1000 + action.castTime * 10),
       iterations: 1,
     }
   )
