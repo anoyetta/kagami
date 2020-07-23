@@ -143,7 +143,7 @@ const showActionIcon = (action) => {
   // console.log(action.castTime)
   icon.animate(
     {
-      transform: [`translateX(${action.castTime}vw)`, `translateX(${-100 / scale}vw)`],
+      transform: [`translateX(${action.castTime / scale}vw)`, `translateX(${-100 / scale}vw)`],
       visibility: ['visible', 'visible']
     },
     {
