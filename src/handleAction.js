@@ -7,6 +7,9 @@ let positionalActionCount = 0
 let mispositionalCount = 0
 let wyrmwaveCount = 0
 
+let speed = 10
+let scale = 1
+
 // job specific values
 const monkPositionals = [
   53, // 連撃
@@ -40,6 +43,10 @@ export const cleanup = () => {
   wyrmwaveCount = 0
 }
 export const getPositionalCounts = () => ({ positionalActionCount, mispositionalCount })
+export const changeSpeed = (value) => {
+  speed = value
+}
+export const changeScale = (value) => { scale = value }
 
 const appendErrorIcon = (icon, errorClass) => {
   icon.classList.add(errorClass)
@@ -136,10 +143,11 @@ const showActionIcon = (action) => {
   // console.log(action.castTime)
   icon.animate(
     {
-      transform: [`translateX(${action.castTime}vw)`, `translateX(${-100}vw)`]
+      transform: [`translateX(${action.castTime}vw)`, `translateX(${-100 / scale}vw)`],
+      visibility: ['visible', 'visible']
     },
     {
-      duration: 10000 + action.castTime * 100,
+      duration: speed * 1000 + action.castTime * 100,
       iterations: 1,
     }
   )
@@ -156,18 +164,20 @@ const autoAttack = () => {
   icon.appendChild(image)
   icon.animate(
     {
-      transform: ['translateX(0)', `translateX(${-100}vw)`]
+      transform: ['translateX(0)', `translateX(${-100 / scale}vw)`],
+      visibility: ['visible', 'visible']
     },
     {
-      duration: 10000,
+      duration: speed * 1000,
       iterations: 1,
     }
   )
 
   document.getElementById('auto-attack-window').appendChild(icon)
   setTimeout(() => {
-    document.getElementById('auto-attack-window').removeChild(icon)
-  }, 10000)
+    try { document.getElementById('auto-attack-window').removeChild(icon) }
+    catch {} // ignore error
+  }, speed * 1000)
 }
 
 export const handleAction = async (primaryCharacter, logCode, logTimestamp, logParameter) => {
@@ -257,6 +267,7 @@ export const handleAction = async (primaryCharacter, logCode, logTimestamp, logP
   action.icon = icon
   actionWindow.appendChild(icon)
   setTimeout(() => {
-    actionWindow.removeChild(icon)
-  }, 10000 + action.castTime * 100)
+    try { actionWindow.removeChild(icon) }
+    catch {} // ignore error
+  }, speed * 1000 + action.castTime * 100)
 }

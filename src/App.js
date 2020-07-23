@@ -2,6 +2,7 @@ import './styles/main.css'
 
 import ACTListener from './ACTListener'
 import parseMessage from './parseMessage'
+import uiControl from './uiControl'
 
 // const initialRender = () => {
 
@@ -23,22 +24,4 @@ const getLanguage = async () => {
 ACTListener(parseMessage)
 getLanguage()
 
-document.getElementById('reset-encounter').addEventListener('click', () => {
-  window.OverlayPluginApi.endEncounter();
-})
-document.getElementById('auto-attack-switch').addEventListener('click', (e) => {
-  if (e.target.checked) { // show
-    document.getElementById('auto-attack-window').style.display = 'inherit'
-  }
-  else { // hide
-    document.getElementById('auto-attack-window').style.display = 'none'
-  }
-})
-document.getElementById('pet-actions-switch').addEventListener('click', (e) => {
-  if (e.target.checked) { // show
-    document.getElementById('pet-actions-window').style.display = 'inherit'
-  }
-  else { // hide
-    document.getElementById('pet-actions-window').style.display = 'none'
-  }
-})
+uiControl()

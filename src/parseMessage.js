@@ -153,7 +153,7 @@ const parseLogLine = (logSplit) => {
     // ["80037569", "80000004", "A8B", "00", "00", "00", "deb0f7a8c61281c53c3e6885eaf69ad8"]
     // ["8003756C", "40000007", "00", "01", "00", "00", "6fa67b88b7299d622ac8341fbe1d9c13"]
     // ["8003756C", "80000004", "13EB", "00", "00", "00", "7976c4ec041735f73b665ae81134f0aa"]
-    console.log(logCode, logTimestamp, logParameter)
+    // console.log(logCode, logTimestamp, logParameter)
     break
   }
   case '34': {
@@ -206,12 +206,13 @@ const updateCombatData = (message) => {
   // update header infos
   const myjobcode = jobcode.indexOf(Combatant.YOU.Job.toUpperCase())
 
-  const dps = Combatant.YOU.ENCDPS.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const dps = Combatant.YOU !== undefined ? Combatant.YOU.ENCDPS.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    : 0
   const rdps = Encounter.ENCDPS.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   const dpercent = Combatant.YOU['damage%']
   document.getElementById('duration').innerHTML = duration
-  document.getElementById('title').innerHTML = title.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  document.getElementById('info').innerHTML = `${dps} DPS / ${rdps} RDPS  (${dpercent})`
+  // document.getElementById('title').innerHTML = title.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  document.getElementById('title').innerHTML = `${dps} DPS / ${rdps} RDPS  (${dpercent})`
 
   // todo: re-render가 필요없을경우 생략해야함~
   const icon = document.getElementById('jobicon')

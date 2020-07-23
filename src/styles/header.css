@@ -64,17 +64,16 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.header-container #title {
+.header-container .title-box {
+  align-items: center;
   font-size: 1em;
-  color: orange;
 }
-.header-container #jobicon .jobicon {
-  width: auto;
-  height: 0.8em;
-  fill: white;
+.header-container .jobicon {
+  height: 1em;
 }
 .header-container #info {
   font-size: 0.8em;
+  color: grey;
 }
 
 
@@ -120,4 +119,36 @@
   display: none;
   visibility: hidden;
   margin-top: -100%;
+}
+
+.radio-container {
+  flex-grow: 1;
+  justify-content: space-around;
+}
+.radio-label div {
+  width: 2em;
+  margin-left: 1px;
+  margin-right: 1px;
+  border-radius: 10%;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+.radio-container input:checked ~ .radio-label div {
+  background-color: rgba(255,165,0, 0.4);
+}
+.radio-label ~ .tooltip {
+  visibility: hidden;
+  background-color: rgba(64,64,64,0.8);
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  left: 4rem;
+  width: 120px;
+ 
+  position: absolute;
+  z-index: 3;
+}
+.radio-label:hover ~ .tooltip {
+  visibility: visible;
 }

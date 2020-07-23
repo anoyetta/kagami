@@ -22,7 +22,7 @@ html, body, #app {
   font-family: "Noto Sans KR", sans-serif;
 }
 
-/* hide checkboxes*/
+/* hide checkboxes */
 input {
   display: none;
 }
@@ -94,6 +94,7 @@ input {
 }
 .skilldisplayer .icon {
   /* width: 0; */
+  visibility: hidden;
   position: absolute;
   display: flex;
   align-items: center;
