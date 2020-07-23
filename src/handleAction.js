@@ -151,7 +151,7 @@ const showActionIcon = (action) => {
       iterations: 1,
     }
   )
-  image.style.paddingRight = `${action.castTime}vw`
+  image.style.paddingRight = `${action.castTime / scale}vw`
 
   return icon
 }
