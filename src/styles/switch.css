@@ -35,11 +35,10 @@
   border-radius: 50%;
   transition: all 0.2s ease;
 }
-.switch:hover .switch-thumb-underlay {
+input:not(:disabled) ~ .switch:hover .switch-thumb-underlay {
   background-color: rgba(100,100,100,0.4);
 }
-
-input:checked ~ .switch .switch-track {
+input:not(:disabled):checked ~ .switch .switch-track {
   background-color: orange;
 }
 input:checked ~ .switch .switch-thumb-underlay {
@@ -47,4 +46,7 @@ input:checked ~ .switch .switch-thumb-underlay {
 }
 input:checked ~ .switch .switch-thumb {
   background-color: orange;
+}
+input:disabled ~ .switch  .switch-thumb {
+  background-color: grey;
 }

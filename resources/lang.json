@@ -1,0 +1,54 @@
+{
+  "lang": {
+    "JP": {
+      "JP": "日本語",
+      "EN": "日本語"
+    },
+    "EN": {
+      "JP": "English",
+      "EN": "English"
+    },
+    "DE": {
+      "JP": "Français",
+      "EN": "Français"
+    },
+    "FR": {
+      "JP": "Deutsch",
+      "EN": "Deutsch"
+    }
+  },
+  "ui": {
+    "title": {
+      "JP": "kagami",
+      "EN": "kagami"
+    },
+    "desc": {
+      "JP": "自分を見て、考えて、",
+      "EN": "mirror your moves, better you move."
+    },
+    "reset-encounter-tooltip": {
+      "JP": "エンカウントリセット",
+      "EN": "Reset encounter"
+    },
+    "auto-attack-tooltip": {
+      "JP": "オートーアタックを表示します。",
+      "EN": "Show auto-attack icons."
+    },
+    "pet-actions-tooltip": {
+      "JP": "ペット（エギ、フェアリー他）のアクションを表示します。",
+      "EN": "Show pet(egi, fairy, etc) action icons."
+    },
+    "positionals-tooltip": {
+      "JP": "向き指定アクションの成功/失敗を確認します。",
+      "EN": "Check positional actions were succeed in right positional."
+    },
+    "viewport-scale-tooltip": {
+      "JP": "アクションを表示する時間を設定します。",
+      "EN": "Scale viewport."
+    },
+    "icon-scale-tooltip": {
+      "JP": "アクションを大きく設定します。",
+      "EN": "Scale action icons."
+    }
+  }
+}

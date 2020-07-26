@@ -1,138 +1,45 @@
-<div class="header">
-  <div class="header-container">
-    <div class="content">
-      <div class="duration-box">
-        <span id="duration">00:00</span>
-        <div id="reset-encounter">
-          <i class="material-icons reset-encounter-button">timer_off</i>
-          <div class="reset-encounter-tooltip">Reset encounter</div>
-        </div>
-      </div>
-      <div class="flex-column info-box">
+<div class="header-container pinned" id="header">
+  <div class="content">
+    <div class="duration-box">
+      <span id="duration">00:00</span>
+    </div>
+    <div class="flex-column info-box">
+      <div>
         <div class="flex-row title-box">
-          <div id="jobicon"></div>
+          <div id="classjob"></div>
           <div id="title">kagami</div>
         </div>
-        <span id="info">mirror your moves, better you move.</span>
+      </div>
+      <div class="info">
+        <span id="crit-dh">mirror your moves, better you move.</span>
+        <span id="mispositional"></span>
+        <span id="interrupted"></span>
+        <span id="ghosted-pet-action"></span>
       </div>
     </div>
-    <div id="menu-icon">
-      <i class="material-icons iconbutton">more_vert</i>
-      <nav class="menu">
-        <label for="auto-attack-switch" class="menu-item">
-          <div>show auto-attack</div>
-          <input type="checkbox" id="auto-attack-switch" checked>
-          <div class="switch">
-            <div class="switch-track"></div>
-            <div class="switch-thumb-underlay">
-              <div class="switch-thumb"></div>
-            </div>
-          </div>
-        </label>
-        <label for="pet-actions-switch" class="menu-item">
-          <div>show pet actions</div>
-          <input type="checkbox" id="pet-actions-switch" checked>
-          <div class="switch">
-            <div class="switch-track"></div>
-            <div class="switch-thumb-underlay">
-              <div class="switch-thumb"></div>
-            </div>
-          </div>
-        </label>
-        <div class="flex-row">
-          <i class="material-icons">timer</i>
-          <form id="speed-form" class="flex-row radio-container"> 
-            <div>
-              <input type="radio" id="speed-1" name="speed-radio" value="20">
-              <label class="radio-label" for="speed-1">
-                <div>20s</div>
-              </label>
-              <div class="tooltip">display actions last 20s</div>
-            </div>
-            <div>
-              <input type="radio" id="speed-2" name="speed-radio" value="15">
-              <label class="radio-label" for="speed-2">
-                <div>15s</div>
-              </label>
-              <div class="tooltip">display actions last 15s</div>
-            </div>
-            <div>
-              <input type="radio" id="speed-3" name="speed-radio" value="10" checked>
-              <label class="radio-label" for="speed-3">
-                <div>10s</div>
-              </label>
-              <div class="tooltip">display actions last 10s</div>
-            </div>
-            <div>
-              <input type="radio" id="speed-4" name="speed-radio" value="8">
-              <label class="radio-label" for="speed-4">
-                <div>8s</div>
-              </label>
-              <div class="tooltip">display actions last 8s</div>
-            </div>
-            <div>
-              <input type="radio" id="speed-5" name="speed-radio" value="5">
-              <label class="radio-label" for="speed-5">
-                <div>5s</div>
-              </label>
-              <div class="tooltip">display actions last 5s</div>
-            </div>
-          </form>
-        </div>
-        <div class="flex-row">
-          <i class="material-icons">photo_size_select_large</i>
-          <form id="scale-form" class="flex-row radio-container"> 
-            <div>
-              <input type="radio" id="scale-1" name="scale-radio" value="1" checked>
-              <label class="radio-label" for="scale-1">
-                <div>1x</div>
-              </label>
-              <div class="tooltip">scale image by 1x</div>
-            </div>
-            <div>
-              <input type="radio" id="scale-2" name="scale-radio" value="1.5">
-              <label class="radio-label" for="scale-2">
-                <div>1.5x</div>
-              </label>
-              <div class="tooltip">scale image by 1.5x</div>
-            </div>
-            <div>
-              <input type="radio" id="scale-3" name="scale-radio" value="2">
-              <label class="radio-label" for="scale-3">
-                <div>2x</div>
-              </label>
-              <div class="tooltip">scale image by 2x</div>
-            </div>
-            <div>
-              <input type="radio" id="scale-4" name="scale-radio" value="3">
-              <label class="radio-label" for="scale-4">
-                <div>3x</div>
-              </label>
-              <div class="tooltip">scale image by 3x</div>
-            </div>
-          </form>
-        </div>
-        <!-- <div>
-          <i class="fas fa-chart-line iconbutton"></i>
-          <div class="tooltip">DPS그래프 표시</div>
-        </div>
-        <div>
-          <i class="fas fa-users iconbutton"></i>
-          <span class="tooltip">파티원 DPS그래프</span>
-        </div>
-        <div>
-          <i class="fas fa-chart-area iconbutton"></i>
-          <span class="tooltip">RDPS그래프</span>
-        </div>
-        <div>
-          <i class="fas fa-stream iconbutton"></i>
-          <span class="tooltip">버프 표시</span>
-        </div>
-        <div>
-          <i class="fas fa-cog iconbutton"></i>
-          <span class="tooltip">설정</span>
-        </div> -->
-      </nav>
-    </div>
   </div>
+  <div class="header-menu">
+    <i class="material-icons iconbutton">menu</i>
+    <nav class="flex-row header-menu-items">
+      <div>
+        <input type="checkbox" id="pin-header-button" checked>
+        <label for="pin-header-button">
+          <i class="material-icons iconbutton">push_pin</i>
+        </label>
+        <div class="tooltip">always show header</div>
+      </div>
+      <div>
+        <i class="material-icons iconbutton" id="reset-encounter">timer_off</i>
+        <div class="tooltip">Reset encounter</div>
+      </div>
+      <div>
+        <input type="checkbox" id="settings-button">
+        <label for="settings-button">
+          <i class="material-icons iconbutton">settings</i>
+        </label>
+        <div class="tooltip">settings</div>
+      </div>
+    </nav>
+  </div>
+  <div class="header-hover" id="header-hover"></div>
 </div>

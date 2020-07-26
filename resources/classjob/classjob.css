@@ -1,0 +1,47 @@
+.classjob {
+  background-image: url(./classjob.png);
+  background-size: 700% 600%;
+  /* background-repeat: no-repeat; */
+  width: 1em;
+  height: 1em;
+}
+
+.classjob-00 { background-position:    0%    0%; }
+.classjob-01 { background-position: -100%    0%; }
+.classjob-02 { background-position: -200%    0%; }
+.classjob-03 { background-position: -300%    0%; }
+.classjob-04 { background-position: -400%    0%; }
+.classjob-05 { background-position: -500%    0%; }
+.classjob-06 { background-position:    0% -100%; }
+.classjob-07 { background-position: -100% -100%; }
+.classjob-08 { background-position: -200% -100%; }
+.classjob-09 { background-position: -300% -100%; }
+.classjob-10 { background-position: -400% -100%; }
+.classjob-11 { background-position: -500% -100%; }
+.classjob-12 { background-position:    0% -200%; }
+.classjob-13 { background-position: -100% -200%; }
+.classjob-14 { background-position: -200% -200%; }
+.classjob-15 { background-position: -300% -200%; }
+.classjob-16 { background-position: -400% -200%; }
+.classjob-17 { background-position: -500% -200%; }
+.classjob-18 { background-position:    0% -300%; }
+.classjob-19 { background-position: -100% -300%; }
+.classjob-20 { background-position: -200% -300%; }
+.classjob-21 { background-position: -300% -300%; }
+.classjob-22 { background-position: -400% -300%; }
+.classjob-23 { background-position: -500% -300%; }
+.classjob-24 { background-position:    0% -400%; }
+.classjob-25 { background-position: -100% -400%; }
+.classjob-26 { background-position: -200% -400%; }
+.classjob-27 { background-position: -300% -400%; }
+.classjob-28 { background-position: -400% -400%; }
+.classjob-29 { background-position: -500% -400%; }
+.classjob-30 { background-position:    0% -500%; }
+.classjob-31 { background-position: -100% -500%; }
+.classjob-32 { background-position: -200% -500%; }
+.classjob-33 { background-position: -300% -500%; }
+.classjob-34 { background-position: -400% -500%; }
+.classjob-35 { background-position: -500% -500%; }
+.classjob-36 { background-position: -600%    0%; }
+.classjob-37 { background-position: -600% -100%; }
+.classjob-38 { background-position: -600% -200%; }

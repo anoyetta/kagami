@@ -1,0 +1,192 @@
+<div class="settings-container flex-column hide" id="settings-container">
+  <!-- <div class="menu-item">
+    <div class="flex-row">
+      <i class="material-icons">translate</i>
+      <span>language</span>
+    </div>
+    <form id="lang-form" class="flex-row radio-container"> 
+      <div>
+        <input type="radio" id="lang-1" name="lang-radio" value="JP" disabled>
+        <label class="radio-label" for="lang-1">
+          <div>J</div>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="lang-2" name="lang-radio" value="EN" checked>
+        <label class="radio-label" for="lang-2">
+          <div>E</div>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="lang-4" name="lang-radio" value="DE" disabled>
+        <label class="radio-label" for="lang-4">
+          <div>D</div>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="lang-3" name="lang-radio" value="FR" disabled>
+        <label class="radio-label" for="lang-3">
+          <div>F</div>
+        </label>
+      </div>
+    </form>
+  </div> -->
+  <!-- <div class="menu-item">
+    <div class="flex-row">
+      <i class="material-icons">palette</i>
+      <span>dark theme</span>
+    </div>
+    <input type="checkbox" id="dark" checked>
+    <label for="dark" class="switch">
+      <div class="switch-track"></div>
+      <div class="switch-thumb-underlay">
+        <div class="switch-thumb"></div>
+      </div>
+    </label>
+  </div> -->
+  <div class="preview skilldisplayer">
+    <div class="flex-row preview-background">PREVIEW</div>
+    <div class="window auto-attack-window" id="settings-aa-window"></div>
+    <div class="window player-actions-window" id="settings-player-window">
+      <div class="icon"><img src="https://xivapi.com/i/000000/000158.png" class="gcd"></div>
+      <div class="icon"><img src="https://xivapi.com/i/000000/000166.png" class="ability"></div>
+    </div>
+    <div class="window pet-actions-window" id="settings-pet-window">
+      <div class="icon"><img src="https://xivapi.com/i/002000/002722.png" class="ability" style="padding-right: 0vw;"></div>
+      <div class="icon"><img src="https://xivapi.com/i/002000/002724.png" class="ability" style="padding-right: 0vw;"></div>
+      <div class="icon"><img src="https://xivapi.com/i/002000/002722.png" class="ability" style="padding-right: 0vw;"></div>
+      <div class="icon"><img src="https://xivapi.com/i/002000/002724.png" class="ability" style="padding-right: 0vw;"></div>
+      <div class="icon"><img src="https://xivapi.com/i/002000/002722.png" class="ability" style="padding-right: 0vw;"></div>
+    </div>
+  </div>
+  <div class="menu-item">
+    <div>
+      show auto-attack
+    </div>
+    <input type="checkbox" id="auto-attack-switch" checked>
+    <label for="auto-attack-switch" class="switch">
+      <div class="switch-track"></div>
+      <div class="switch-thumb-underlay">
+        <div class="switch-thumb"></div>
+      </div>
+    </label>
+  </div>
+  <div class="menu-item">
+    <div>
+      show pet actions
+    </div>
+    <input type="checkbox" id="pet-actions-switch" checked>
+    <label for="pet-actions-switch" class="switch">
+      <div class="switch-track"></div>
+      <div class="switch-thumb-underlay">
+        <div class="switch-thumb"></div>
+      </div>
+    </label>
+  </div>
+  <div class="menu-item">
+    <div class="flex-row">
+      <i class="material-icons">shutter_speed</i>
+      <span>display time</span>
+    </div>
+    <form id="speed-form" class="flex-row radio-container"> 
+      <div>
+        <input type="radio" id="speed-1" name="speed-radio" value="20">
+        <label class="radio-label" for="speed-1">
+          <div>20s</div>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="speed-2" name="speed-radio" value="15">
+        <label class="radio-label" for="speed-2">
+          <div>15s</div>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="speed-3" name="speed-radio" value="10" checked>
+        <label class="radio-label" for="speed-3">
+          <div>10s</div>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="speed-4" name="speed-radio" value="8">
+        <label class="radio-label" for="speed-4">
+          <div>8s</div>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="speed-5" name="speed-radio" value="5">
+        <label class="radio-label" for="speed-5">
+          <div>5s</div>
+        </label>
+      </div>
+    </form>
+  </div>
+  <div class="menu-item">
+    <div class="flex-row">
+      <i class="material-icons">photo_size_select_large</i>
+      <span>icon scale</span>
+    </div>
+    <form id="scale-form" class="flex-row radio-container"> 
+      <div>
+        <input type="radio" id="scale-0.5" name="scale-radio" value="0.5">
+        <label class="radio-label" for="scale-0.5">
+          <div>0.5x</div>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="scale-0.8" name="scale-radio" value="0.8">
+        <label class="radio-label" for="scale-0.8">
+          <div>0.8x</div>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="scale-1" name="scale-radio" value="1" checked>
+        <label class="radio-label" for="scale-1">
+          <div>1x</div>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="scale-1.5" name="scale-radio" value="1.5">
+        <label class="radio-label" for="scale-1.5">
+          <div>1.5x</div>
+        </label>
+      </div>
+      <div>
+        <input type="radio" id="scale-2" name="scale-radio" value="2">
+        <label class="radio-label" for="scale-2">
+          <div>2x</div>
+        </label>
+      </div>
+    </form>
+  </div>
+  <!-- <hr class="divider">
+  <div class="menu-item">
+    <div class="flex-row">
+      <i class="material-icons">control_camera</i>
+      <div class="flex-column">
+        <span>check positional miss</span>
+        <span>(SAM not supported)</span>
+      </div>
+    </div>
+    <input type="checkbox" id="positional-switch" checked disabled>
+    <label for="positional-switch" class="switch">
+      <div class="switch-track"></div>
+      <div class="switch-thumb-underlay">
+        <div class="switch-thumb"></div>
+      </div>
+    </label>
+  </div>
+  <div class="menu-item">
+    <div class="flex-row">
+      <i class="material-icons">textsms</i>
+      <span>show casting actions</span>
+    </div>
+    <input type="checkbox" id="casting-switch" checked disabled>
+    <label for="casting-switch" class="switch">
+      <div class="switch-track"></div>
+      <div class="switch-thumb-underlay">
+        <div class="switch-thumb"></div>
+      </div>
+    </label>
+  </div> -->
+</div>

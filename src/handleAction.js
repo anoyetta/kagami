@@ -1,11 +1,15 @@
 import actionResource from '../resources/actions/actions.json'
 
+const info = document.getElementById('info')
+
 let lastTimestamp = -1;
 let lastActionID = -1;
 let lastCastAction = null;
 let positionalActionCount = 0
 let mispositionalCount = 0
-let wyrmwaveCount = 0
+let castingCount = 0
+let interruptedCount = 0
+let petGhostedActionCount = 0
 
 let speed = 10
 let scale = 1
@@ -40,13 +44,82 @@ export const cleanup = () => {
   lastCastAction = null
   positionalActionCount = 0
   mispositionalCount = 0
-  wyrmwaveCount = 0
+  castingCount = 0
+  interruptedCount = 0
+  petGhostedActionCount = 0
+}
+const updateInfo = (classjob) => {
+  const mispositional = (param) => {
+    if (param) {
+      document.getElementById('mispositional').classList.remove('hide')
+      document.getElementById('mispositional').innerHTML = `mispositional: ${mispositionalCount}`
+    }
+    else document.getElementById('mispositional').classList.add('hide')
+  }
+  // info
+  switch (classjob) {
+  case 'PGL':
+  case 'LNC':
+  case 'MNK':
+  case 'DRG':
+  case 'ROG':
+  case 'NIN': {
+    // positional
+    mispositional(true)
+    break
+  }
+  case 'CNJ':
+  case 'THM':
+  case 'PLD':
+  case 'WHM':
+  case 'BLM':
+  case 'AST':
+  case 'RDM':
+  case 'BLU': {
+    // casting
+    mispositional(false)
+    break
+  }
+  case 'ACN':
+  case 'SMN':
+  case 'SCH': {
+    // casting, ghosted pet actions
+    mispositional(false)
+    break
+  }
+  case 'SAM': {
+    // positional, casting
+    mispositional(false)
+    break
+  }
+  case 'ADV':
+  case 'GLA':
+  case 'MRD':
+  case 'ARC':
+  case 'CRP':
+  case 'BSM':
+  case 'ARM':
+  case 'GSM':
+  case 'LTW':
+  case 'ALC':
+  case 'CUL':
+  case 'MIN':
+  case 'BOT':
+  case 'FSH':
+  case 'WAR':
+  case 'BRD':
+  case 'MCH':
+  case 'DRK':
+  case 'GNB':
+  case 'DNC':
+  default: {
+    mispositional(false)
+  }
+  }
 }
 export const getPositionalCounts = () => ({ positionalActionCount, mispositionalCount })
-export const changeSpeed = (value) => {
-  speed = value
-}
-export const changeScale = (value) => { scale = value }
+export const updateSpeed = (value) => { speed = value }
+export const updateScale = (value) => { scale = value }
 
 const appendErrorIcon = (icon, errorClass) => {
   icon.classList.add(errorClass)
@@ -63,7 +136,7 @@ const appendErrorIcon = (icon, errorClass) => {
   icon.appendChild(errorIcon)
 }
 
-export const handleInterrupt = (primaryCharacter, logParameter) => {
+export const handleInterrupt = (primaryCharacter, logParameter, active) => {
   const actionID = parseInt(logParameter[2], 16)
   const inturruptedAction = {
     actionID,
@@ -79,7 +152,9 @@ export const handleInterrupt = (primaryCharacter, logParameter) => {
 
   if (inturruptedAction.actorID === primaryCharacter.charID
     && inturruptedAction.actorID === lastCastAction.actorID) {
+    interruptedCount++
     appendErrorIcon(lastCastAction.icon, 'interrupted')
+    if (active) updateInfo(primaryCharacter.classjob)
   }
 }
 
@@ -140,18 +215,20 @@ const showActionIcon = (action) => {
   if (action.classes.includes('mispositional')) {
     appendErrorIcon(icon, 'mispositional')
   }
-  // console.log(action.castTime)
+  let castingBarLength = 0
+  if (action.castTime !== 0) {
+    castingBarLength = (action.castTime / (speed * scale))
+    image.style.paddingRight = `${castingBarLength}vw`
+  }
   icon.animate(
     {
-      transform: [`translateX(${action.castTime / scale}vw)`, `translateX(${-100 / scale}vw)`],
-      visibility: ['visible', 'visible']
+      right: [`-${castingBarLength}vw`, '100%'],
     },
     {
-      duration: speed * (1000 + action.castTime * 10),
+      duration: speed * 1000 + action.castTime * 10,
       iterations: 1,
     }
   )
-  image.style.paddingRight = `${action.castTime / scale}vw`
 
   return icon
 }
@@ -164,8 +241,7 @@ const autoAttack = () => {
   icon.appendChild(image)
   icon.animate(
     {
-      transform: ['translateX(0)', `translateX(${-100 / scale}vw)`],
-      visibility: ['visible', 'visible']
+      right: [0, '100%'],
     },
     {
       duration: speed * 1000,
@@ -180,8 +256,7 @@ const autoAttack = () => {
   }, speed * 1000)
 }
 
-export const handleAction = async (primaryCharacter, logCode, logTimestamp, logParameter) => {
-  // console.log(logParameter)
+export const handleAction = async (primaryCharacter, logCode, logTimestamp, logParameter, active) => {
   let actionWindow = null
   const actionID = parseInt(logParameter[2], 16)
   const action = {
@@ -193,7 +268,7 @@ export const handleAction = async (primaryCharacter, logCode, logTimestamp, logP
     // targetID: logParameter[4],
     // targetName: logParameter[5],
     classes: [],
-    castTime: logCode === '20' ? Math.ceil(parseFloat(logParameter[6]) * 10) - 6 : 0,
+    castTime: logCode === '20' ? Math.ceil(parseFloat(logParameter[6]) * 100) - 65 : 0,
     icon: null,
     Image: '',
     CooldownGroup: [0, 0],
@@ -214,9 +289,6 @@ export const handleAction = async (primaryCharacter, logCode, logTimestamp, logP
     actionWindow = document.getElementById('pet-actions-window')
   }
   else return
-
-  // no mount call action
-  // if (actionID === 4) return
 
   // auto-attack
   if (actionID === 7 || actionID === 8) {
@@ -251,6 +323,7 @@ export const handleAction = async (primaryCharacter, logCode, logTimestamp, logP
     const positional = checkPositional(actionID, logParameter)
     const gcd = action.CooldownGroup.includes(58)
     if (casting) {
+      castingCount++
       action.classes.push('casting')
       lastCastAction = action
     }
@@ -270,4 +343,5 @@ export const handleAction = async (primaryCharacter, logCode, logTimestamp, logP
     try { actionWindow.removeChild(icon) }
     catch {} // ignore error
   }, speed * 1000 + action.castTime * 100)
+  if (active) updateInfo(primaryCharacter.classjob)
 }

@@ -1,0 +1,82 @@
+{
+  "auto-attacks": {
+    "timing": [1, 3.1, 5.2, 7.3, 9.4],
+    "element": "<div class='icon'><img src='https://xivapi.com/i/000000/000101.png'></div>"
+  },
+  "player-actions": [
+    {
+      "timing": 0,
+      "castTime": 0,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/002000/002901.png' class='gcd'></div>"
+    },
+    {
+      "timing": 0.5,
+      "castTime": 0,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/002000/002902.png' class='gcd'></div>"
+    },
+    {
+      "timing": 1,
+      "castTime": 0,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/002000/002903.png' class='gcd'></div>"
+    },
+    {
+      "timing": 1.5,
+      "castTime": 0,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/002000/002913.png' class='gcd'></div>"
+    },
+    {
+      "timing": 2.2,
+      "castTime": 0,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/000000/000618.png' class='ability'></div>"
+    },
+    {
+      "timing": 3,
+      "castTime": 0,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/000000/000605.png' class='gcd'></div>"
+    },
+    {
+      "timing": 3.7,
+      "castTime": 0,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/002000/002918.png' class='ability'></div>"
+    },
+    {
+      "timing": 4.4,
+      "castTime": 0,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/000000/000612.png' class='ability'></div>"
+    },
+    {
+      "timing": 5.1,
+      "castTime": 0,
+      "element": "<div class='icon mispositional'><img src='https://xivapi.com/i/000000/000605.png' class='mispositional gcd'><i class='material-icons error-icon'>error</i></div>"
+    },
+    {
+      "timing": 6.1,
+      "castTime": 0,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/002000/002636.png' class='ability'></div>"
+    },
+    {
+      "timing": 7.2,
+      "castTime": 1.8,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/000000/000409.png' class='casting gcd'></div>"
+    },
+    {
+      "timing": 9,
+      "castTime": 0,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/000000/000409.png' class='gcd'></div>"
+    },
+    {
+      "timing": 9.7,
+      "castTime": 0,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/000000/000866.png' class='ability'></div>"
+    },
+    {
+      "timing": 10.4,
+      "castTime": 0,
+      "element": "<div class='icon'><img src='https://xivapi.com/i/000000/000408.png' class='gcd'></div>"
+    }
+  ],
+  "pet-actions": {
+    "timing": [0.6, 2.8, 5, 7.2, 9.4],
+    "element": "<div class='icon'><img src='https://xivapi.com/i/002000/002722.png' class='ability'></div>"
+  }
+}

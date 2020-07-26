@@ -1,15 +1,16 @@
-import jobcode from '../resources/jobicons'
-import { handleAction, handleInterrupt } from './handleAction';
+import classjob from '../resources/classjob/classjob.json'
+import { handleAction, handleInterrupt, cleanup } from './handleAction';
 
 let primaryCharacter = {
   charID: -1,
   charName: 'kagami',
+  classjob: 'ADV',
   petID: -1,
   petName: '',
 }
+let active = false
 
-const updatePet = (logCode, logParameter) => {
-  const summoned = logCode === '03'
+const updatePet = (logParameter) => {
   const [
     charID, // '1024fab4'
     charName, // 'ガルーダ・エギ'
@@ -20,17 +21,10 @@ const updatePet = (logCode, logParameter) => {
     world, // 'Asura'
     charCode, // ifrit 1402 titan 1403 ...
   ] = logParameter
-  // [7] ifrit 1402 titan 1403 garuda 1404? eos 1398 selene 1399 seraphim 8227
-  // drk parse(33321) mch parse(8230)
+  if (parseInt(charCode, 10) === 0) return // no chocobo
   if (parseInt(ownerID, 16) === primaryCharacter.charID) {
-    if (summoned) {
-      primaryCharacter.petID = parseInt(charID, 16)
-      primaryCharacter.petName = charName
-    // } else {
-    //   primaryCharacter.petID = -1
-    //   primaryCharacter.petName = ''
-    }
-    // 04가늦게와서 이렇게하면망한다
+    primaryCharacter.petID = parseInt(charID, 16)
+    primaryCharacter.petName = charName
     console.log(`your pet is: ${primaryCharacter.petID}, ${primaryCharacter.petName} (code: ${charCode})`)
   }
 }
@@ -90,11 +84,13 @@ const parseLogLine = (logSplit) => {
   //   updatePet(logParameter)
   //   break
   // }
-  case '03':
+  case '03': {
+    updatePet(logParameter)
+    break
+  }
   case '04': {
     // unsubscribe character?
     // console.log(logCode, logTimestamp, logParameter)
-    updatePet(logCode, logParameter)
     break
   }
   case '11': {
@@ -112,12 +108,12 @@ const parseLogLine = (logSplit) => {
   case '21': // action
   case '22': // multi-target action
   {
-    handleAction(primaryCharacter, logCode, logTimestamp, logParameter)
+    handleAction(primaryCharacter, logCode, logTimestamp, logParameter, active)
     break
   }
   case '23': {
     // cancel casting
-    handleInterrupt(primaryCharacter, logParameter)
+    handleInterrupt(primaryCharacter, logParameter, active)
     break
   }
   case '24': {
@@ -204,20 +200,41 @@ const updateCombatData = (message) => {
   const { duration, title, } = Encounter
 
   // update header infos
-  const myjobcode = jobcode.indexOf(Combatant.YOU.Job.toUpperCase())
+  let jobCode = -1
+  let dps = 0
+  let crit = '0%'
+  let dh = '0%'
+  let critDh = '0%'
+  if (Combatant.YOU !== undefined) {
+    const job = Combatant.YOU.Job.toUpperCase()
+    if (job !== primaryCharacter.classjob) {
+      primaryCharacter.classjob = job
+      jobCode = classjob.indexOf(job)
+      const jobIcon = document.getElementById('classjob')
+      jobIcon.classList.remove(...jobIcon.classList)
+      jobIcon.classList.add('classjob', `classjob-${jobCode !== -1 ? jobCode : '00'}`)
+    }
+    dps = Combatant.YOU.ENCDPS.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    crit = Combatant.YOU['crithit%']
+    dh = Combatant.YOU['DirectHitPct']
+    critDh = Combatant.YOU['CritDirectHitPct']
+  }
 
-  const dps = Combatant.YOU !== undefined ? Combatant.YOU.ENCDPS.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-    : 0
   const rdps = Encounter.ENCDPS.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   const dpercent = Combatant.YOU['damage%']
   document.getElementById('duration').innerHTML = duration
-  // document.getElementById('title').innerHTML = title.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   document.getElementById('title').innerHTML = `${dps} DPS / ${rdps} RDPS  (${dpercent})`
+  document.getElementById('crit-dh').innerHTML = `Crit/DH/CritDH: ${crit}/${dh}/${critDh}`
 
-  // todo: re-render가 필요없을경우 생략해야함~
-  const icon = document.getElementById('jobicon')
-  icon.classList.remove(...icon.classList)
-  icon.classList.add('jobicon', `jobicon-${myjobcode !== -1 ? myjobcode : '00'}`)
+  active = !(isActive === 'false')
+  if (active) {
+    document.getElementById('duration').classList.add('active')
+  }
+  else {
+    // cleanup
+    document.getElementById('duration').classList.remove('active')
+    cleanup()
+  }
 }
 
 const parseMessage = (event) => {

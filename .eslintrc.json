@@ -17,7 +17,9 @@
     "no-bitwise": "off",
     "no-plusplus": "off",
     "comma-dangle": "off",
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "dot-notation": "off",
+    "no-param-reassign": ["error", { "props": false }]
   },
   "globals": {
     "addOverlayListener": false,

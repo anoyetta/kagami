@@ -13,6 +13,9 @@ function listenActWebSocket(callback) {
     if (e.data === '.') return ws.send('.')
 
     const obj = JSON.parse(e.data)
+    if (obj.msgtype === 'CombatData') {
+      return callback({ type: 'CombatData', message: obj.msg })
+    }
     if (obj.msgtype === 'SendCharName') {
       return callback({ type: 'ChangePrimaryPlayer', message: obj.msg })
     }
