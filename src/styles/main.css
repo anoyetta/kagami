@@ -113,32 +113,35 @@ input:disabled ~ label .iconbutton {
 
 .auto-attack-window {
   height: 1em;
+}.auto-attack-window i.error-icon {
+  font-size: 1em;
 }
 .player-actions-window {
   height: 3em;
 }
+.player-actions-window img.gcd ~ i.error-icon {
+  font-size: 3em;
+}
+.player-actions-window img.ability ~ i.error-icon {
+  font-size: 2em;
+}
+.icon.interrupted i.error-icon {
+  font-size: 1.8em !important;
+}
 .pet-actions-window {
   height: 2em;
+}
+.pet-actions-window i.error-icon {
+  font-size: 2em;
 }
 
 .casting {
   background-color: #212121aa;
 }
-.interrupted {
-  background-color: transparent;
-  padding-right: 0;
-  /* margin-right: 0; */
-}
 .interrupted img {
+  background-color: transparent;
   filter: grayscale(0.2) blur(0.1em);
   opacity: 1;
-}
-.interrupted i.error-icon {
-  position: absolute;
-  left: 0;
-  font-size: 1.8em;
-  bottom: 0;
-  color: red;
 }
 .mispositional {
   vertical-align: center;
@@ -147,9 +150,10 @@ input:disabled ~ label .iconbutton {
 .mispositional img {
   filter: grayscale(0.2) blur(0.1em);
 }
-.mispositional i.error-icon {
+.icon i.error-icon {
   position: absolute;
-  font-size: 3em;
+  left: 0;
+  bottom: 0;
   color: red;
 }
 
