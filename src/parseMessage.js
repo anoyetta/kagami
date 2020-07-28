@@ -1,5 +1,7 @@
 import classjob from '../resources/classjob/classjob.json'
-import { handleAction, handleInterrupt, cleanup } from './handleAction';
+import {
+  handleAction, handleInterrupt, cleanup, handleJobGauge
+} from './handleAction';
 
 let primaryCharacter = {
   charID: -1,
@@ -27,20 +29,6 @@ const updatePet = (logParameter) => {
     primaryCharacter.petName = charName
     console.log(`your pet is: ${primaryCharacter.petID}, ${primaryCharacter.petName} (code: ${charCode})`)
   }
-}
-
-const handleJobGauge = (logParameter) => {
-  const [
-    actor,
-    gauge1,
-    gauge2,
-    gauge3,
-    gauge4,
-  ] = logParameter
-  const jobCode = parseInt(gauge1, 16) & 0xFF
-  // console.log(jobCode, gauge1, gauge2, gauge3, gauge4)
-  gauge = parseInt(gauge2, 16) & 0xFF
-  console.log(gauge)
 }
 
 const handleBuff = (logTimestamp, logParameter) => {
@@ -142,7 +130,7 @@ const parseLogLine = (logSplit) => {
   }
   case '31': {
     // job gauge
-    // handleJobGauge(logParameter)
+    handleJobGauge(primaryCharacter, logParameter)
     break
   }
   case '33': { // no idea about this
