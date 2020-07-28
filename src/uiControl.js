@@ -127,29 +127,12 @@ const headerMenu = () => {
   settingsChecker.addEventListener('click', (e) => {
     slider.classList.toggle('settings')
     settingsContainer.classList.toggle('hide')
-    if (e.target.checked) {
-      if (!header.classList.contains('pinned')) {
-        header.classList.add('pinned')
-      }
-    }
-    else if (!pinHeaderChecker.checked) {
-      header.classList.remove('pinned')
-    }
-    animatePreview()
+    if (e.target.checked) animatePreview()
   })
   pinHeaderChecker.addEventListener('click', (e) => {
-    if (e.target.checked) {
-      if (!header.classList.contains('pinned')) {
-        header.classList.add('pinned')
-      }
-      settings['pin-header'] = true
-      saveSettings()
-    }
-    else if (!settingsChecker.checked) {
-      header.classList.remove('pinned')
-      settings['pin-header'] = false
-      saveSettings()
-    }
+    header.classList.toggle('pinned')
+    settings['pin-header'] = e.target.checked
+    saveSettings()
   })
 }
 
