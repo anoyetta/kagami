@@ -53,6 +53,20 @@
 .divider {
   border-top: 1px solid #bbb;
 }
+.contact {
+  text-align: center;
+}
+content div {
+  padding: 0.5em
+}
+.contact .black {
+  background-color: #000000bb;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+span.orange {
+  color: orange
+}
 
 /* webkit-scrollbar */
 ::-webkit-scrollbar {
