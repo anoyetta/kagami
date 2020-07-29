@@ -1,11 +1,12 @@
 import previewActions from '../resources/preview.json'
+import { setLanguage, updateUi } from './lang';
 
 const { updateSpeed, updateScale } = require('./handleAction');
 
 const skillDisplayer = document.getElementsByClassName('skilldisplayer')
 const aaWindow = document.getElementsByClassName('auto-attack-window')
 const playerActionsWindow = document.getElementById('player-actions-window')
-const petActionsWindow = document.getElementsByClassName('pet-actions-window')
+const petActionsWindow = document.getElementById('pet-actions-window')
 
 const header = document.getElementById('header')
 const slider = document.getElementById('slider')
@@ -18,6 +19,7 @@ const settingsAAWindow = document.getElementById('settings-aa-window')
 const settingsPlayerActionWindow = document.getElementById('settings-player-window')
 const settingsPetActionWindow = document.getElementById('settings-pet-window')
 
+const languageForm = document.getElementById('lang-form')
 const aaWindowChecker = document.getElementById('auto-attack-switch')
 const petActionsChecker = document.getElementById('pet-actions-switch')
 const displayTimeForm = document.getElementById('speed-form')
@@ -84,6 +86,10 @@ const animatePreview = () => {
 const saveSettings = () => {
   localStorage.setItem('kagami', JSON.stringify(settings))
 }
+const changeLang = (lang) => {
+  setLanguage(lang)
+  updateUi()
+}
 const changeDisplayTime = (time) => {
   aaWindow.innerHTML = ''
   playerActionsWindow.innerHTML = ''
@@ -117,10 +123,12 @@ const applySettings = () => {
       window.classList.add('hide')
     })
   }
+  languageForm['lang-radio'].value = settings['lang']
   displayTimeForm['speed-radio'].value = settings['display-time']
   scaleForm['scale-radio'].value = settings['scale']
   changeDisplayTime(settings['display-time'])
   changeScale(settings['scale'])
+  changeLang(settings['lang'])
 }
 
 const headerMenu = () => {
@@ -142,6 +150,12 @@ const uiControl = (param) => {
   headerMenu()
   document.getElementById('reset-encounter').addEventListener('click', () => {
     window.OverlayPluginApi.endEncounter();
+  })
+  languageForm.addEventListener('change', (e) => {
+    const lang = e.target.value
+    changeLang(lang)
+    settings['lang'] = lang
+    saveSettings()
   })
   aaWindowChecker.addEventListener('click', (e) => {
     if (e.target.checked) { // show

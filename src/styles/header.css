@@ -85,14 +85,15 @@
 
 * ~ .tooltip {
   visibility: hidden;
-  background-color: rgba(64,64,64,0.8);
+  background-color: #212121bb;
   color: white;
   text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
+  padding: 0.5em 1em;
+  border-radius: 1em;
   top: 3em;
   right: 3em;
-  width: 120px;
+  width: 10em;
+  /* width: 120px; */
  
   position: absolute;
   z-index: 3;

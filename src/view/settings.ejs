@@ -1,12 +1,31 @@
 <div class="settings-container flex-column hide" id="settings-container">
   <!-- <div class="menu-item">
     <div class="flex-row">
+      <i class="material-icons">palette</i>
+      <span>dark theme</span>
+    </div>
+    <input type="checkbox" id="dark" checked>
+    <label for="dark" class="switch">
+      <div class="switch-track"></div>
+      <div class="switch-thumb-underlay">
+        <div class="switch-thumb"></div>
+      </div>
+    </label>
+  </div> -->
+  <div class="preview skilldisplayer">
+    <div class="flex-row preview-background">PREVIEW</div>
+    <div class="window auto-attack-window" id="settings-aa-window"></div>
+    <div class="window player-actions-window" id="settings-player-window"></div>
+    <div class="window pet-actions-window" id="settings-pet-window"></div>
+  </div>
+  <div class="menu-item">
+    <div class="flex-row">
       <i class="material-icons">translate</i>
-      <span>language</span>
+      <span id="lang-tooltip">language</span>
     </div>
     <form id="lang-form" class="flex-row radio-container"> 
       <div>
-        <input type="radio" id="lang-1" name="lang-radio" value="JP" disabled>
+        <input type="radio" id="lang-1" name="lang-radio" value="JP">
         <label class="radio-label" for="lang-1">
           <div>J</div>
         </label>
@@ -30,29 +49,10 @@
         </label>
       </div>
     </form>
-  </div> -->
-  <!-- <div class="menu-item">
-    <div class="flex-row">
-      <i class="material-icons">palette</i>
-      <span>dark theme</span>
-    </div>
-    <input type="checkbox" id="dark" checked>
-    <label for="dark" class="switch">
-      <div class="switch-track"></div>
-      <div class="switch-thumb-underlay">
-        <div class="switch-thumb"></div>
-      </div>
-    </label>
-  </div> -->
-  <div class="preview skilldisplayer">
-    <div class="flex-row preview-background">PREVIEW</div>
-    <div class="window auto-attack-window" id="settings-aa-window"></div>
-    <div class="window player-actions-window" id="settings-player-window"></div>
-    <div class="window pet-actions-window" id="settings-pet-window"></div>
   </div>
   <div class="menu-item">
-    <div>
-      show auto-attack
+    <div id="auto-attacks-tooltip">
+      show auto-attacks
     </div>
     <input type="checkbox" id="auto-attack-switch" checked>
     <label for="auto-attack-switch" class="switch">
@@ -63,7 +63,7 @@
     </label>
   </div>
   <div class="menu-item">
-    <div>
+    <div id="pet-actions-tooltip">
       show pet actions
     </div>
     <input type="checkbox" id="pet-actions-switch" checked>
@@ -77,7 +77,7 @@
   <div class="menu-item">
     <div class="flex-row">
       <i class="material-icons">shutter_speed</i>
-      <span>display time</span>
+      <span id="display-time-tooltip">display time</span>
     </div>
     <form id="speed-form" class="flex-row radio-container"> 
       <div>
@@ -115,7 +115,7 @@
   <div class="menu-item">
     <div class="flex-row">
       <i class="material-icons">photo_size_select_large</i>
-      <span>icon scale</span>
+      <span id="icon-scale-tooltip">icon scale</span>
     </div>
     <form id="scale-form" class="flex-row radio-container"> 
       <div>
@@ -183,8 +183,7 @@
   <hr class="divider">
   <div class="contact flex-column">
     <div class="black">kagami v0.0.1</div>
-    <div><span class="orange">kagami</span> is mirror on Japanese.</div>
-    <div>kagami will show you, will innovate you.</div>
+    <div id="patch-info">FFXIV patch version: v5.25</div>
     <div>💬Contact: discord ram#5923</div>
   </div>
 </div>

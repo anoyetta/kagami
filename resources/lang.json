@@ -17,38 +17,70 @@
       "EN": "Deutsch"
     }
   },
-  "ui": {
-    "title": {
-      "JP": "kagami",
-      "EN": "kagami"
-    },
+  "element": {
     "desc": {
-      "JP": "自分を見て、考えて、",
+      "JP": "見て、感じて、考え直せ。",
       "EN": "mirror your moves, better you move."
+    },
+    "pin-header-tooltip": {
+      "JP": "ヘッダを固定",
+      "EN": "always show header"
     },
     "reset-encounter-tooltip": {
       "JP": "エンカウントリセット",
-      "EN": "Reset encounter"
+      "EN": "reset encounter"
     },
-    "auto-attack-tooltip": {
-      "JP": "オートーアタックを表示します。",
-      "EN": "Show auto-attack icons."
+    "settings-tooltip": {
+      "JP": "設定",
+      "EN": "settings"
+    },
+    "lang-tooltip": {
+      "JP": "言語",
+      "EN": "language"
+    },
+    "auto-attacks-tooltip": {
+      "JP": "オートーアタック表示",
+      "EN": "Show auto-attacks"
     },
     "pet-actions-tooltip": {
-      "JP": "ペット（エギ、フェアリー他）のアクションを表示します。",
-      "EN": "Show pet(egi, fairy, etc) action icons."
+      "JP": "ペットアクション表示",
+      "EN": "Show pet actions"
     },
-    "positionals-tooltip": {
-      "JP": "向き指定アクションの成功/失敗を確認します。",
-      "EN": "Check positional actions were succeed in right positional."
-    },
-    "viewport-scale-tooltip": {
-      "JP": "アクションを表示する時間を設定します。",
-      "EN": "Scale viewport."
+    "display-time-tooltip": {
+      "JP": "アイコン表示時間",
+      "EN": "display time"
     },
     "icon-scale-tooltip": {
-      "JP": "アクションを大きく設定します。",
-      "EN": "Scale action icons."
+      "JP": "アイコンサイズ",
+      "EN": "icon scale"
+    },
+    "patch-info": {
+      "JP": "パッチ5.25対応済み",
+      "EN": "FFXIV patch version: v5.25"
+    }
+  },
+  "map": {
+    "critdh": {
+      "JP": "D.Hit/C.Hit/C.D.Hit",
+      "EN": "D.Hit/C.Hit/C.D.Hit"
+    },
+    "mispositional": {
+      "JP": "向き指定失敗",
+      "EN": "mispositionals"
+    }
+  },
+  "temp": {
+    "positionals-tooltip": {
+      "JP": "向き指定失敗を表示",
+      "EN": "show mispositionals"
+    },
+    "casting-tooltip": {
+      "JP": "詠唱アイコンを表示",
+      "EN": "show casting icons"
+    },
+    "interrupt-tooltip": {
+      "JP": "詠唱キャンセルを表示",
+      "EN": "show casting interrupt"
     }
   }
 }

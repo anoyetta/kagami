@@ -1,5 +1,6 @@
 import actionResource from '../resources/actions/actions.json'
 import classjob from '../resources/classjob/classjob.json'
+import { lang } from './lang';
 
 const info = document.getElementById('info')
 
@@ -59,7 +60,7 @@ const updateInfo = (classjob) => {
     if (param) {
       const mispositionalRate = positionalActionCount !== 0 ? Math.trunc((mispositionalCount / positionalActionCount) * 100) : 0
       document.getElementById('mispositional').classList.remove('hide')
-      document.getElementById('mispositional').innerHTML = `mispositional: ${mispositionalCount}/${positionalActionCount} (${mispositionalRate}%)`
+      document.getElementById('mispositional').innerHTML = `${lang('mispositional')}: ${mispositionalCount}/${positionalActionCount} (${mispositionalRate}%)`
     }
     else document.getElementById('mispositional').classList.add('hide')
   }
