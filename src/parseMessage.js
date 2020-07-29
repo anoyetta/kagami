@@ -2,6 +2,7 @@ import classjob from '../resources/classjob/classjob.json'
 import {
   handleAction, handleInterrupt, cleanup, handleJobGauge
 } from './handleAction';
+import { lang } from './lang';
 
 let primaryCharacter = {
   charID: -1,
@@ -212,7 +213,8 @@ const updateCombatData = (message) => {
   const dpercent = Combatant.YOU['damage%']
   document.getElementById('duration').innerHTML = duration
   document.getElementById('title').innerHTML = `${dps} DPS / ${rdps} RDPS  (${dpercent})`
-  document.getElementById('crit-dh').innerHTML = `Crit/DH/CritDH: ${crit}/${dh}/${critDh}`
+  document.getElementById('crit-dh').innerHTML = `${lang('critdh')}: ${dh}/${crit}/${critDh}`
+  document.getElementById('desc').classList.add('hide')
 
   active = !(isActive === 'false')
   if (active) {

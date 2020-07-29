@@ -263,6 +263,7 @@ const showActionIcon = (action) => {
   icon.animate(
     {
       right: [`-${castingBarLength}vw`, '100%'],
+      visibility: ['visible', 'visible']
     },
     {
       duration: displayTime * 1000 + action.castTime * 10,
@@ -282,6 +283,7 @@ const autoAttack = () => {
   icon.animate(
     {
       right: [0, '100%'],
+      visibility: ['visible', 'visible']
     },
     {
       duration: displayTime * 1000,

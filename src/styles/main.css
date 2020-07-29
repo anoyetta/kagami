@@ -106,6 +106,7 @@ input:disabled ~ label .iconbutton {
   align-items: center;
   right: 100%;
   display: relative;
+  visibility: hidden;
 }
 .skilldisplayer img:not(.fetching) {
   animation: icon-pulse 0.5s ease;
@@ -137,7 +138,7 @@ input:disabled ~ label .iconbutton {
 
 .casting {
   opacity: 0.4;
-  background-color: #212121aa;
+  background-color: #eeeeee;
 }
 .interrupted img {
   background-color: transparent;

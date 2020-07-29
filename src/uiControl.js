@@ -6,7 +6,7 @@ const { updateSpeed, updateScale } = require('./handleAction');
 const skillDisplayer = document.getElementsByClassName('skilldisplayer')
 const aaWindow = document.getElementsByClassName('auto-attack-window')
 const playerActionsWindow = document.getElementById('player-actions-window')
-const petActionsWindow = document.getElementById('pet-actions-window')
+const petActionsWindow = document.getElementsByClassName('pet-actions-window')
 
 const header = document.getElementById('header')
 const slider = document.getElementById('slider')
@@ -43,6 +43,7 @@ const animatePreview = () => {
       settingsAAWindow.lastChild.animate(
         {
           right: [0, '100%'],
+          visibility: ['visible', 'visible']
         },
         {
           duration: settings['display-time'] * 1000,
@@ -60,6 +61,7 @@ const animatePreview = () => {
       icon.animate(
         {
           right: [`-${castingBarLength}vw`, '100%'],
+          visibility: ['visible', 'visible']
         },
         {
           duration: 1000 * (settings['display-time'] + action.castTime),
@@ -74,6 +76,7 @@ const animatePreview = () => {
       settingsPetActionWindow.lastChild.animate(
         {
           right: [0, '100%'],
+          visibility: ['visible', 'visible']
         },
         {
           duration: settings['display-time'] * 1000,
@@ -91,18 +94,18 @@ const changeLang = (lang) => {
   updateUi()
 }
 const changeDisplayTime = (time) => {
-  aaWindow.innerHTML = ''
+  Array.from(aaWindow).forEach((window) => { window.innerHTML = '' })
   playerActionsWindow.innerHTML = ''
-  petActionsWindow.innerHTML = ''
+  Array.from(petActionsWindow).forEach((window) => { window.innerHTML = '' })
   updateSpeed(time)
 }
 const changeScale = (scale) => {
   Array.from(skillDisplayer).forEach((window) => {
     window.style.zoom = scale
   })
-  aaWindow.innerHTML = ''
+  Array.from(aaWindow).forEach((window) => { window.innerHTML = '' })
   playerActionsWindow.innerHTML = ''
-  petActionsWindow.innerHTML = ''
+  Array.from(petActionsWindow).forEach((window) => { window.innerHTML = '' })
   updateScale(scale)
 }
 
