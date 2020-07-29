@@ -368,7 +368,7 @@ export const handleAction = async (primaryCharacter, logCode, logTimestamp, logP
       mispositionalCount++
     }
     if (gcd) action.classes.push('gcd')
-    else action.classes.push('ability')
+    else action.classes.push('ogcd')
   }
 
   const icon = showActionIcon(action)
