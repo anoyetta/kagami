@@ -164,7 +164,7 @@ export const handleInterrupt = (primaryCharacter, logParameter, active) => {
   }
 }
 
-export const handleJobGauge = (primaryCharacter, logParameter) => {
+export const handleJobGauge = (primaryCharacter, logParameter, active) => {
   if (parseInt(logParameter[0], 16) === primaryCharacter.charID) {
     if (logParameter[1] === '22') { // sam
       const kenki = parseInt(logParameter[2], 16) & 0xFF
@@ -173,6 +173,7 @@ export const handleJobGauge = (primaryCharacter, logParameter) => {
           // samurai mispositional
           appendErrorIcon(samuraiResources.action.icon, 'mispositional')
           mispositionalCount++
+          if (active) updateInfo(primaryCharacter.classjob)
         }
         samuraiResources.checkPositional = false
       }
@@ -212,6 +213,7 @@ const checkPositional = (action, logParameter) => {
   }
   if (samuraiPositionals.includes(action.actionID)) {
     // samurai rear/flank check
+    positionalActionCount++
     const comboCode = '4F71' // 4F710*03
     console.log(logParameter)
     if (logParameter[6].includes(comboCode)) { // combo bonus.

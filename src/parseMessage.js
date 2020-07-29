@@ -130,7 +130,7 @@ const parseLogLine = (logSplit) => {
   }
   case '31': {
     // job gauge
-    handleJobGauge(primaryCharacter, logParameter)
+    handleJobGauge(primaryCharacter, logParameter, active)
     break
   }
   case '33': { // no idea about this
