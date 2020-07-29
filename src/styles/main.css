@@ -136,6 +136,7 @@ input:disabled ~ label .iconbutton {
 }
 
 .casting {
+  opacity: 0.4;
   background-color: #212121aa;
 }
 .interrupted img {
@@ -168,8 +169,12 @@ input:disabled ~ label .iconbutton {
 .player-actions-window img.ogcd {
   width: 2em;
 }
-.pet-actions-window img {
+.pet-actions-window img:not(.casting) {
   width: 2em;
+}
+.pet-actions-window img.casting {
+  margin-top: 0.5em;
+  width: 1.5em;
 }
 .auto-attack-window img {
   width: 1em;

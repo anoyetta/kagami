@@ -57,8 +57,9 @@ export const cleanup = () => {
 const updateInfo = (classjob) => {
   const mispositional = (param) => {
     if (param) {
+      const mispositionalRate = positionalActionCount !== 0 ? Math.trunc((mispositionalCount / positionalActionCount) * 100) : 0
       document.getElementById('mispositional').classList.remove('hide')
-      document.getElementById('mispositional').innerHTML = `mispositional: ${mispositionalCount}/${positionalActionCount}`
+      document.getElementById('mispositional').innerHTML = `mispositional: ${mispositionalCount}/${positionalActionCount} (${mispositionalRate}%)`
     }
     else document.getElementById('mispositional').classList.add('hide')
   }
@@ -254,7 +255,7 @@ const showActionIcon = (action) => {
     appendErrorIcon(icon, 'mispositional')
   }
   let castingBarLength = 0
-  if (action.castTime !== 0) {
+  if (action.classes.includes('casting') && action.castTime !== 0) {
     castingBarLength = (action.castTime / (displayTime * scale))
     image.style.paddingRight = `${castingBarLength}vw`
   }
@@ -306,7 +307,7 @@ export const handleAction = async (primaryCharacter, logCode, logTimestamp, logP
     // targetID: logParameter[4],
     // targetName: logParameter[5],
     classes: [],
-    castTime: logCode === '20' ? Math.ceil(parseFloat(logParameter[6]) * 100) - 65 : 0,
+    castTime: logCode === '20' ? Math.ceil(parseFloat(logParameter[6]) * 100) : 0,
     icon: null,
     Image: '',
     CooldownGroup: [0, 0],
@@ -322,6 +323,7 @@ export const handleAction = async (primaryCharacter, logCode, logTimestamp, logP
   // only parse primaryCharacter and pet action
   if (action.actorID === primaryCharacter.charID) {
     actionWindow = document.getElementById('player-actions-window')
+    if (action.castTime > 66) action.castTime -= 66
   }
   else if (action.actorID === primaryCharacter.petID) {
     actionWindow = document.getElementById('pet-actions-window')
