@@ -1,32 +1,30 @@
 # kagami
 
-FFXIV ACT overlay for capturing used actions, including GCDs/oGCDs/auto-attacks/pet actions/items and more.
+*kagami* is **mirror** in Japanese. show your FFXIV skill rotations with *kagami*, looking back your rotations with *kagami*!
 
-*kagami* means **mirror** in japanese. 
+## example videos
 
-###### so where can i use this?
+[![hawaii](https://i9.ytimg.com/vi/He6r6paOYp4/mqdefault.jpg?sqp=CIywiPkF&rs=AOn4CLBGdqUsec58BdkC4jp9h7etLhzIEg)](https://youtu.be/He6r6paOYp4)
 
-- 
-- who wants to record his/her rotation in video
-- who wants to show his/her rotation in stream
-- ...maybe more!
+NIN PoV. can check miss positional
 
+[![youtube-smn-pov](https://i9.ytimg.com/vi/mkAPPWO0x0A/mqdefault.jpg?sqp=CIywiPkF&rs=AOn4CLAtC8vN0cfFJvRe6AYBSR_0h2rmvQ)](https://youtu.be/mkAPPWO0x0A)
 
+SMN PoV. can check egi, bahamut pet actions, and use with other overlay([MOPIMOPI](https://github.com/HAERUHAERU/mopimopi))
 
-## feature
+## features
 
-- show GCDs / oGCDs
-- show AAs / hide AAs
-- show pet actions / hide pet actions
-- scale viewport / icon sizes
-- melee positional check *(exclude SAM, currently working on it)*
-- interrupted castings check
+![settings](settings.png)
 
+- show player & pet actions.
+- track player casting and its interrupt.
+- melee positional(rear/flank) check
+- rich settings
 
 
 ## installation
 
-1. get ACT and FFXIV 
+// TODO
 
 
 
@@ -35,12 +33,21 @@ FFXIV ACT overlay for capturing used actions, including GCDs/oGCDs/auto-attacks/
 - cannot indicate pet before *kagami* launch
   (you have to re-summon your pet after launch *kagami*😥)
 - item, mount icons are coming out later than expected timing
-- SAM positional support
-- pet ghosted action tracking
 
 
+## upcoming features
 
-## thanks to
+- ghosted pet action tracking
+- off positional check or casting
+- theme customization
 
-- ngld overlay plugin
-- xivapi
+
+## contact
+
+discord `ram#5923` (japanese, english, korean)
+
+
+## waiting for your contribute!
+
+any PR is welcome. especially:
+- DE, FR language
