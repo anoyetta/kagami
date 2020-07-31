@@ -1,53 +1,55 @@
 # kagami
 
-*kagami* is **mirror** in Japanese. show your FFXIV skill rotations with *kagami*, looking back your rotations with *kagami*!
+*kagami* is **mirror** in Japanese. 
 
-## example videos
+show your FFXIV skill rotations with *kagami*, looking back your rotations with *kagami*!
 
-[![hawaii](https://i9.ytimg.com/vi/He6r6paOYp4/mqdefault.jpg?sqp=CIywiPkF&rs=AOn4CLBGdqUsec58BdkC4jp9h7etLhzIEg)](https://youtu.be/He6r6paOYp4)
+## example videos👀
 
-NIN PoV. can check miss positional
+[![youtube-nin-pov](https://img.youtube.com/vi/He6r6paOYp4/0.jpg)](https://youtu.be/He6r6paOYp4)
 
-[![youtube-smn-pov](https://i9.ytimg.com/vi/mkAPPWO0x0A/mqdefault.jpg?sqp=CIywiPkF&rs=AOn4CLAtC8vN0cfFJvRe6AYBSR_0h2rmvQ)](https://youtu.be/mkAPPWO0x0A)
+- [NIN PoV video.](https://youtu.be/He6r6paOYp4) can check miss positional
 
-SMN PoV. can check egi, bahamut pet actions, and use with other overlay([MOPIMOPI](https://github.com/HAERUHAERU/mopimopi))
+[![youtube-smn-pov](https://img.youtube.com/vi/mkAPPWO0x0A/0.jpg)](https://youtu.be/mkAPPWO0x0A)
 
-## features
+- [SMN PoV](https://youtu.be/mkAPPWO0x0A). can check egi/bahamut pet actions👀, and use with other overlay([MOPIMOPI](https://github.com/HAERUHAERU/mopimopi))
+
+## features🚀
 
 ![settings](settings.png)
 
 - show player & pet actions.
 - track player casting and its interrupt.
 - melee positional(rear/flank) check
-- rich settings
+- rich settings✨
 
 
-## installation
+## installation🔨
 
-// TODO
+See [installation](https://github.com/ramram1048/kagami/blob/master/installation.md).
 
 
-
-## known issues
+## known issues🚧
 
 - cannot indicate pet before *kagami* launch
   (you have to re-summon your pet after launch *kagami*😥)
 - item, mount icons are coming out later than expected timing
 
 
-## upcoming features
+## upcoming features⚡
 
 - ghosted pet action tracking
 - off positional check or casting
 - theme customization
 
 
-## contact
+## contact💬
 
-discord `ram#5923` (japanese, english, korean)
+- discord `ram#5923` (japanese, english, korean)
+- make [issue](https://github.com/ramram1048/kagami/issues) in this repository
 
 
-## waiting for your contribute!
+## waiting for your contribute!💗
 
-any PR is welcome. especially:
+any PRs are welcome, especially:
 - DE, FR language
