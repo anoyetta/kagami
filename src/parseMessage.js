@@ -1,6 +1,6 @@
 import classjob from '../resources/classjob/classjob.json'
 import {
-  handleAction, handleInterrupt, cleanup, handleJobGauge
+  handleAction, handleInterrupt, cleanup, handleJobGauge, handleHit, unsubscribePet
 } from './handleAction';
 import { lang } from './lang';
 
@@ -13,22 +13,18 @@ let primaryCharacter = {
 }
 let active = false
 
-const updatePet = (logParameter) => {
-  const [
-    charID, // '1024fab4'
-    charName, // 'ガルーダ・エギ'
-    jobcode, // '1c'
-    level, // '50'
-    ownerID, // '1024fab4'
-    whatisthis, // i dun no
-    world, // 'Asura'
-    charCode, // ifrit 1402 titan 1403 ...
-  ] = logParameter
-  if (parseInt(charCode, 10) === 0) return // no chocobo
-  if (parseInt(ownerID, 16) === primaryCharacter.charID) {
-    primaryCharacter.petID = parseInt(charID, 16)
-    primaryCharacter.petName = charName
-    console.log(`your pet is: ${primaryCharacter.petID}, ${primaryCharacter.petName} (code: ${charCode})`)
+const updatePet = (logCode, logParameter) => {
+  const charID = parseInt(logParameter[0], 16)
+  const ownerID = parseInt(logParameter[4], 16)
+  const charCode = parseInt(logParameter[7], 16)
+  if (charCode === 0) return // no chocobo
+  if (ownerID === primaryCharacter.charID) {
+    if (logCode === '03') {
+      primaryCharacter.petID = charID
+    }
+    else {
+      unsubscribePet(charID)
+    }
   }
 }
 
@@ -64,7 +60,7 @@ const parseLogLine = (logSplit) => {
   case '02': {
     // whats this?
     // ["1024fab4", "Ram Toshiya", "5494139e55eca005aab352afd0656920"]
-    console.log(logCode, logTimestamp, logParameter)
+    // console.log(logCode, logTimestamp, logParameter)
     break
   }
   // {
@@ -74,10 +70,11 @@ const parseLogLine = (logSplit) => {
   //   break
   // }
   case '03': {
-    updatePet(logParameter)
+    updatePet(logCode, logParameter)
     break
   }
   case '04': {
+    updatePet(logCode, logParameter)
     // unsubscribe character?
     // console.log(logCode, logTimestamp, logParameter)
     break
@@ -134,25 +131,24 @@ const parseLogLine = (logSplit) => {
     handleJobGauge(primaryCharacter, logParameter, active)
     break
   }
-  case '33': { // no idea about this
+  case '33':
+    // no idea about this
     // ["80037569", "80000004", "A8B", "00", "00", "00", "deb0f7a8c61281c53c3e6885eaf69ad8"]
     // ["8003756C", "40000007", "00", "01", "00", "00", "6fa67b88b7299d622ac8341fbe1d9c13"]
     // ["8003756C", "80000004", "13EB", "00", "00", "00", "7976c4ec041735f73b665ae81134f0aa"]
     // console.log(logCode, logTimestamp, logParameter)
-    break
-  }
-  case '34': {
+  case '34':
     // pet logs? (does not includes owner info and baha/pheonix)
-    break
-  }
-  case '35': {
+  case '35':
     // ["1024FAB4", "Ram Toshiya", "4000B957", "バハムート・プライム", "0000", "0000", "0004", "4000B957", "000F", "0719", "", "0f66487698da4e739748d9697913ffc3"]
     // ["4000BBFE", "ファイアホーン", "102893A7", "Noie Traryd", "6A8B", "0000", "0005", "102893A7", "000F", "7FA6", "", "9e7af6150c16be1650b0b5f7b49b4fe1"]
-    console.log(logCode, logTimestamp, logParameter)
+  case '36': {
     break
   }
-  case '36':
-  case '37':
+  case '37': { // action hitted?
+    handleHit(logParameter)
+    break
+  }
   case '38':
   case '39': {
     // status/existence related logs?
