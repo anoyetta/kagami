@@ -2,7 +2,10 @@
 
 name: gh-pages
 
-on: [push, pull_request]
+on: 
+  push:
+    .branches:
+      - deploy
 
 jobs:
   build:

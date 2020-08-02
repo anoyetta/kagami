@@ -19,7 +19,9 @@
     "comma-dangle": "off",
     "linebreak-style": "off",
     "dot-notation": "off",
-    "no-param-reassign": ["error", { "props": false }]
+    "no-param-reassign": ["error", { "props": false }],
+    "no-fallthrough": "warn",
+    "max-len": ["warn", 80]
   },
   "globals": {
     "addOverlayListener": false,
