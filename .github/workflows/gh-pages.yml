@@ -5,7 +5,7 @@ name: gh-pages
 on: 
   push:
     .branches:
-      - deploy
+      - master
 
 jobs:
   build:
