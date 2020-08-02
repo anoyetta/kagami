@@ -1,5 +1,4 @@
 import actionResource from '../resources/actions/actions.json'
-import classjob from '../resources/classjob/classjob.json'
 import { lang } from './lang';
 
 const info = document.getElementById('info')
@@ -12,6 +11,10 @@ let mispositionalCount = 0
 let castingCount = 0
 let interruptedCount = 0
 let petGhostedActionCount = 0
+const petResources = {
+  actions: [],
+  lastCasting: null,
+}
 
 let displayTime = 10
 let scale = 1
@@ -144,6 +147,20 @@ const appendErrorIcon = (icon, errorClass) => {
   icon.appendChild(errorIcon)
 }
 
+export const unsubscribePet = (petID) => {
+  petResources.actions = petResources.actions.filter((action) => {
+    if (action.actorID === petID) {
+      appendErrorIcon(action.icon, 'mispositional')
+      petGhostedActionCount++
+    }
+    return false
+  })
+}
+
+export const handleHit = (logParameter) => {
+  petResources.actions = petResources.actions.filter((action) => action.hitID !== parseInt(logParameter[2], 16))
+}
+
 export const handleInterrupt = (primaryCharacter, logParameter, active) => {
   const actionID = parseInt(logParameter[2], 16)
   const inturruptedAction = {
@@ -159,10 +176,15 @@ export const handleInterrupt = (primaryCharacter, logParameter, active) => {
   }
 
   if (inturruptedAction.actorID === primaryCharacter.charID
-    && inturruptedAction.actorID === lastCastAction.actorID) {
+  && inturruptedAction.actorID === lastCastAction.actorID) {
     interruptedCount++
     appendErrorIcon(lastCastAction.icon, 'interrupted')
-    if (active) updateInfo(primaryCharacter.classjob)
+    // if (active) updateInfo(primaryCharacter.classjob)
+  }
+  else if (inturruptedAction.actorID === primaryCharacter.petID
+  && inturruptedAction.actorID === petResources.lastCasting.actorID) {
+    petGhostedActionCount++
+    appendErrorIcon(petResources.lastCasting.icon, 'interrupted')
   }
 }
 
@@ -306,6 +328,7 @@ export const handleAction = async (primaryCharacter, logCode, logTimestamp, logP
     actionID,
     actionName: logParameter[3],
     actorID: parseInt(logParameter[0], 16),
+    hitID: parseInt(logParameter[42], 16),
     // actorName: logParameter[1],
     // targetID: logParameter[4],
     // targetName: logParameter[5],
@@ -328,8 +351,12 @@ export const handleAction = async (primaryCharacter, logCode, logTimestamp, logP
     actionWindow = document.getElementById('player-actions-window')
     if (action.castTime > 66) action.castTime -= 66
   }
-  else if (action.actorID === primaryCharacter.petID) {
+  else if (primaryCharacter.petID === action.actorID) {
     actionWindow = document.getElementById('pet-actions-window')
+    if (logCode !== '20') {
+      petResources.actions.push(action)
+    }
+    else petResources.lastCasting = action
   }
   else return
 
