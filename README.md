@@ -21,6 +21,7 @@ show your FFXIV skill rotations with *kagami*, looking back your rotations with 
 - show player & pet actions.
 - track player casting and its interrupt.
 - melee positional(rear/flank) check
+- pet actions validation
 - rich settings✨
 
 
@@ -34,12 +35,12 @@ See [installation](https://github.com/ramram1048/kagami/blob/master/installation
 - cannot indicate pet before *kagami* launch
   (you have to re-summon your pet after launch *kagami*😥)
 - item, mount icons are coming out later than expected timing
+- bug on pet action validation when hitting low-level striking dummies(see #8)
 
 
 ## upcoming features⚡
 
-- ghosted pet action tracking
-- off positional check or casting
+- off positional check or pet actions validation setting
 - theme customization
 
 
